@@ -6,7 +6,10 @@ modulos a instalar
 -python -m pip install python-dotenv
 
 
-ejecutar App > python src/Main.py
+ejecutar App
+pwd src/
+
+ > python Main.py
 
 ejemplo archivo .env 
 DB_NAME = inacap
