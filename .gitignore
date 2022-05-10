@@ -130,3 +130,5 @@ dmypy.json
 
 # Ignorando archivos
 **/.DS_Store
+.idea/*
+.vscode/*
