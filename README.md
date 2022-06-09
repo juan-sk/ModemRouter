@@ -11,8 +11,13 @@ pwd src/
 
  > python Main.py
 
-ejemplo archivo .env 
-DB_NAME = inacap
+Ejemplo archivo .env 
+
+DB_NAME = tma
 DB_USERNAME=root
 DB_PASSWORD=123456
 DB_HOST = localhost
+DB_PORT = 3306
+
+LOG_FILE_PATH=C:\logs\
+LOG_LEVEL = DEBUG

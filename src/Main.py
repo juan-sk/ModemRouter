@@ -1,35 +1,56 @@
-from time import time
-
+from asyncio.log import logger
+import logging
 from config.Config import Config
 from config.DBConection import DBConnection
+from repository.TicketRepository import TicketRepository
 
 
 
 class Application:
       
-      def __init__(self):
-        Config().configurar()
-            
-      def start(self):
-        value = 0
-        while True:
-          print("la aplicacion inicio")
-          # time.sleep(5)  
-          value = value+1
-          print(value)
-          if(value >=10):
-            break   
-        self.stop()
-          
-      def stop(self):
-            DBConnection.close()
+  def __init__(self):
+    Config().configurar()
+    logging.info("########### [INICIO DE LA APLICACION] ###############")
+    logging.info("configurando dependencias")
+    self.trepo = TicketRepository()
+        
+  def start(self):
+    value = 0
+    logging.info("Start de aplicacion")
+    logger.info("informacion")
+    while True:
+      self.mainEventLoop()
+      value = value+1
+      if(value >=1):
+        break   
+    self.stop()
+    
+    
+  def mainEventLoop(self):
+    #login        
+    # todo el codigo deberia ir aqui
+    tickets = self.trepo.obtenerTickets()
+    for item in tickets:
+      print (item)
+         
+        
+        
+        
+  def stop(self):
+    DBConnection.close()
+    logging.info("########### [FIN DE LA APLICACION] ###############")
+    
             
             
   
 def main():
-    
     App = Application()
-    App.start()
+    try:
+        App.start()
+    except Exception as error :
+        print("ERROR - ocurrio un error")
+        print(error)
+        App.stop()  
   
 
 
