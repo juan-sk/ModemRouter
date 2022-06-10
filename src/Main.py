@@ -3,6 +3,7 @@ import logging
 from config.Config import Config
 from config.DBConection import DBConnection
 from repository.TicketRepository import TicketRepository
+from repository.TipoTicketRepository import TipoTicketRepository
 from repository.UsuarioRepository import UsuarioRepository
 
 
@@ -15,6 +16,7 @@ class Application:
     logging.info("configurando dependencias")
     self.trepo = TicketRepository()
     self.uRepo = UsuarioRepository() 
+    self.ttRepo = TipoTicketRepository() 
         
   def start(self):
     value = 0
@@ -34,8 +36,11 @@ class Application:
     # tickets = self.trepo.obtenerTickets()
     # for item in tickets:
     #   print (item)
-    usuarios = self.uRepo.obtenerUsuarios()
-    for item in usuarios:
+    # usuarios = self.uRepo.obtenerUsuarios()
+    # for item in usuarios:
+    #   print (item)
+    tipoTicket = self.ttRepo.obtenerTipoTickets()
+    for item in tipoTicket:
       print (item)
          
         
