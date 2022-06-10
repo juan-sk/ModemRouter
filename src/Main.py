@@ -3,6 +3,7 @@ import logging
 from config.Config import Config
 from config.DBConection import DBConnection
 from repository.TicketRepository import TicketRepository
+from repository.UsuarioRepository import UsuarioRepository
 
 
 
@@ -13,6 +14,7 @@ class Application:
     logging.info("########### [INICIO DE LA APLICACION] ###############")
     logging.info("configurando dependencias")
     self.trepo = TicketRepository()
+    self.uRepo = UsuarioRepository() 
         
   def start(self):
     value = 0
@@ -29,8 +31,11 @@ class Application:
   def mainEventLoop(self):
     #login        
     # todo el codigo deberia ir aqui
-    tickets = self.trepo.obtenerTickets()
-    for item in tickets:
+    # tickets = self.trepo.obtenerTickets()
+    # for item in tickets:
+    #   print (item)
+    usuarios = self.uRepo.obtenerUsuarios()
+    for item in usuarios:
       print (item)
          
         
