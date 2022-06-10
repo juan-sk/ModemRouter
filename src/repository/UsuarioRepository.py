@@ -1,6 +1,5 @@
 import logging
 from config.Config import Config
-from entity.TicketEntity import TicketEntity
 from entity.UsuarioEntity import UsuarioEntity
 
 
