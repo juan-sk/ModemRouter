@@ -2,6 +2,7 @@ from asyncio.log import logger
 import logging
 from config.Config import Config
 from config.DBConection import DBConnection
+from gui.Gui import Gui
 from repository.AreaRepository import AreaRepository
 from repository.CriticidadRepository import CriticidadRepository
 from repository.TicketRepository import TicketRepository
@@ -49,9 +50,11 @@ class Application:
     # areas= self.areaRepo.obtenerAreas()
     # for item in areas:
     #   print (item)
-    criticidades= self.criticidadRepo.obtenerCriticidades()
-    for item in criticidades:
-      print (item)
+    # criticidades= self.criticidadRepo.obtenerCriticidades()
+    # for item in criticidades:
+    #   print (item)
+    gui = Gui()
+    gui.gui()
          
         
         
