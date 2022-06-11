@@ -2,6 +2,7 @@ from asyncio.log import logger
 import logging
 from config.Config import Config
 from config.DBConection import DBConnection
+from repository.AreaRepository import AreaRepository
 from repository.TicketRepository import TicketRepository
 from repository.TipoTicketRepository import TipoTicketRepository
 from repository.UsuarioRepository import UsuarioRepository
@@ -17,6 +18,7 @@ class Application:
     self.trepo = TicketRepository()
     self.uRepo = UsuarioRepository() 
     self.ttRepo = TipoTicketRepository() 
+    self.areaRepo = AreaRepository() 
         
   def start(self):
     value = 0
@@ -39,8 +41,11 @@ class Application:
     # usuarios = self.uRepo.obtenerUsuarios()
     # for item in usuarios:
     #   print (item)
-    tipoTicket = self.ttRepo.obtenerTipoTickets()
-    for item in tipoTicket:
+    # tipoTicket = self.ttRepo.obtenerTipoTickets()
+    # for item in tipoTicket:
+    #   print (item)
+    areas= self.areaRepo.obtenerAreas()
+    for item in areas:
       print (item)
          
         
