@@ -3,6 +3,7 @@ import logging
 from config.Config import Config
 from config.DBConection import DBConnection
 from repository.AreaRepository import AreaRepository
+from repository.CriticidadRepository import CriticidadRepository
 from repository.TicketRepository import TicketRepository
 from repository.TipoTicketRepository import TipoTicketRepository
 from repository.UsuarioRepository import UsuarioRepository
@@ -19,6 +20,7 @@ class Application:
     self.uRepo = UsuarioRepository() 
     self.ttRepo = TipoTicketRepository() 
     self.areaRepo = AreaRepository() 
+    self.criticidadRepo = CriticidadRepository() 
         
   def start(self):
     value = 0
@@ -44,8 +46,11 @@ class Application:
     # tipoTicket = self.ttRepo.obtenerTipoTickets()
     # for item in tipoTicket:
     #   print (item)
-    areas= self.areaRepo.obtenerAreas()
-    for item in areas:
+    # areas= self.areaRepo.obtenerAreas()
+    # for item in areas:
+    #   print (item)
+    criticidades= self.criticidadRepo.obtenerCriticidades()
+    for item in criticidades:
       print (item)
          
         
