@@ -8,5 +8,7 @@ class JefeMesa:
     
     
     def start(self):
+        
         self.gestionarUsuario.gestionarUsuario()
-    
+    def menuOpcionesJefeMesa(self):
+        print("Opcions jefeesa")

@@ -63,7 +63,7 @@ class GestionarUsuario:
             usuario = self.formularioCreacionUsuario()
             print(usuario)
             
-            print(" ¿Los valores para el suuario son Correctos? (Si,No)")
+            print(" ¿Los valores para el Usuario son Correctos? (Si,No)")
             resp = GuiInputUtils.inputSiNo()
             if resp >0:
                 break
@@ -98,7 +98,7 @@ class GestionarUsuario:
                  
         idTipoUsuario = GuiInputUtils.inputNumber(opcionesValidas)
         
-        area = 0
+        idArea = 0
         if idTipoUsuario ==3:
             # agregar area 
             # obtener areas
