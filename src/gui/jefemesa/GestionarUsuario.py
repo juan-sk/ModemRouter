@@ -2,6 +2,7 @@ import getpass
 import logging
 from controller.JefeDeMesaController import JefeDeMesaController
 from entity.UsuarioEntity import UsuarioEntity
+from pojo.Usuario import Usuario
 from utils.GuiInputUtils import GuiInputUtils
 from utils.GuiUtils import GuiUtils
 
@@ -10,7 +11,7 @@ class GestionarUsuario:
     
     def __init__(self ):
         self.jefeDeMesaController = JefeDeMesaController()
-    
+
     
 
     def gestionarUsuario(self):
@@ -78,7 +79,7 @@ class GestionarUsuario:
             
     
     def formularioCreacionUsuario(self):
-        usuario = UsuarioEntity()
+        usuario = Usuario()
         nombreUsuario = input("Nombre de usuario:")
         print("Contraseña del usaurio")
         passwordUsuario =  getpass.getpass()
@@ -97,12 +98,23 @@ class GestionarUsuario:
                  
         idTipoUsuario = GuiInputUtils.inputNumber(opcionesValidas)
         
+        area = 0
+        if idTipoUsuario ==3:
+            # agregar area 
+            # obtener areas
+            areas = self.jefeDeMesaController.obtenerAreas();
+            # mostrar
+            opcionesValidasArea = []
+            if len(areas)>0:
+                for item in areas:
+                    print("%s). %s Detalle:%s"%(item.id,item.nomArea,item.dscArea))
+                    opcionesValidasArea.append(item.id)
+            idArea = GuiInputUtils.inputNumber(opcionesValidasArea)
         usuario.nombreUsuario = nombreUsuario
         usuario.password = passwordUsuario
         usuario.idEstado = 1
         usuario.idTipoUsuario =idTipoUsuario
-        
-        
+        usuario.idArea = idArea
         return usuario
         
         

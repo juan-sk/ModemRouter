@@ -50,43 +50,34 @@ class UsuarioRepository:
             logging.error(error)
             raise Exception
         
-    def guardarUsuario(self,usuario):
-        
-        try:
-            cursor =  self._dbConn.cursor()
-            SQL = """
-            INSERT INTO
-                `tma`.`usuario` (
-                    `id_usuario`,
-                    `nombre_usuario`,
-                    `password`,
-                    `id_estado`,
-                    `id_tipo_usuario`
-                )
-            VALUES
-                (
-                    %s,
-                    %s,
-                    %s,
-                    %s,
-                    %s
-                );
-
-            """
-            
-            val = (
-                usuario.id,
-                usuario.nombreUsuario,
-                usuario.password,
-                usuario.idEstado,
-                usuario.idTipoUsuario
+    def guardarUsuario(self,cursor, usuario):
+        SQL = """
+        INSERT INTO
+            `tma`.`usuario` (
+                `id_usuario`,
+                `nombre_usuario`,
+                `password`,
+                `id_estado`,
+                `id_tipo_usuario`
             )
-            cursor.execute(SQL, val)
+        VALUES
+            (
+                %s,
+                %s,
+                %s,
+                %s,
+                %s
+            );
 
-            self._dbConn.commit()
-            
-        except Exception as error :
-            logging.error("ocurrrio un error al intentar guardar un usuario")
-            logging.error(error)
-            raise error
+        """
+        val = (
+            usuario.id,
+            usuario.nombreUsuario,
+            usuario.password,
+            usuario.idEstado,
+            usuario.idTipoUsuario
+        )
+        cursor.execute(SQL, val)
+
+        
        

@@ -21,6 +21,14 @@ class JefeDeMesaController:
             logging.error(error)
             # se retorna null 
             pass
+    def obtenerAreas(self):
+        try:
+            
+            areas = self.usuarioService.obtenerArea()
+            return areas
+        except Exception as error:
+            logging.error("ocurrio un error al obtener las areas")
+            logging.error(error)
     def guardarUsuario(self,usuario):
         try:
             self.usuarioService.guardarUsuario(usuario)
