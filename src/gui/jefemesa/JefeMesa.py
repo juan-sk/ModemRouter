@@ -4,9 +4,9 @@ from gui.jefemesa.GestionarUsuario import GestionarUsuario
 class JefeMesa:
     
     def __init__(self):
-        pass
+        self.gestionarUsuario =GestionarUsuario() 
     
     
     def start(self):
-        GestionarUsuario.gestionarUsuario()
+        self.gestionarUsuario.gestionarUsuario()
     

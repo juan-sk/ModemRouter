@@ -16,4 +16,6 @@ class UsuarioService:
             logging.error("ocurrio un error al validar las credenciales del usuario")
             logging.error(error)
             raise error
+    def guardarUsuario(self,usuario):
+        self.usuarioRepo.guardarUsuario(usuario)
         
