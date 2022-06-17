@@ -61,7 +61,7 @@ class GestionarUsuario:
             print("     Creacion de usuario         ")
             print("")
             usuario = self.formularioCreacionUsuario()
-            print(usuario)
+            usuario.print()
             
             print(" ¿Los valores para el Usuario son Correctos? (Si,No)")
             resp = GuiInputUtils.inputSiNo()
@@ -93,11 +93,11 @@ class GestionarUsuario:
         # imprimir opciones
         if len(tiposUsuario)>0:
             for item in tiposUsuario:
-                print("%s). %s Descripcion:%s"%(item.id,item.nomTipoUsuario,item.dscTipoUsuraio))
+                print("%s). %s - Descripcion:%s"%(item.id,item.nomTipoUsuario,item.dscTipoUsuraio))
                 opcionesValidas.append(item.id)
                  
         idTipoUsuario = GuiInputUtils.inputNumber(opcionesValidas)
-        
+        usuario.dscTipoUsuario =Usuario.encontrarTipoUsuario(idTipoUsuario,tiposUsuario).nomTipoUsuario
         idArea = 0
         if idTipoUsuario ==3:
             # agregar area 
