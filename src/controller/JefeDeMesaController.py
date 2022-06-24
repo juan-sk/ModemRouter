@@ -14,7 +14,7 @@ class JefeDeMesaController:
     def obtenerTiposUsuario(self):
         try:
             logging.info("se inicia la obtencion de tipos de usuario")
-            tiposUsuario=  self.tipoUsuarioService.obtenerTiposDeUsuario()
+            tiposUsuario=  self.usuarioService.obtenerTiposDeUsuario()
             logging.info("se termina la obtencion de tipos de usuario")
             return tiposUsuario
         except Exception as error:

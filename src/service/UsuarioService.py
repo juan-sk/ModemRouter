@@ -5,6 +5,7 @@ from entity.AreaUsuarioEntity import AreaUsuarioEntity
 from entity.UsuarioEntity import UsuarioEntity
 from repository.AreaRepository import AreaRepository
 from repository.AreaUsuarioReposotory import AreaUsuarioReposotory
+from repository.TipoUsuarioRepository import TipoUsuarioRepository
 from repository.UsuarioRepository import UsuarioRepository
 
 
@@ -15,6 +16,7 @@ class UsuarioService:
         self.usuarioRepo = UsuarioRepository()
         self.areaRepo = AreaRepository()
         self.areaUsuarioRepo = AreaUsuarioReposotory()
+        self.tipoTiketRepo = TipoUsuarioRepository()
         self._dbConn = Config().DBConnection
         
     def validarusuario(self, usaurio,password):
@@ -53,4 +55,15 @@ class UsuarioService:
         
     def obtenerArea (self):
         return self.areaRepo.obtenerAreas();
+    
+        
+    def obtenerTiposDeUsuario(self):
+        
+        try:
+            tiposUsuario = self.tipoTiketRepo.obtenerTipoUsuarios()
+            return tiposUsuario
+        except Exception as error:
+            logging.error("ocurrio un error en el servicio al obtener los tipos de usuario")
+            logging.error(error)
+            return []
         
