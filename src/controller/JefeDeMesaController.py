@@ -1,5 +1,4 @@
 import logging
-from service.TipoUsuarioService import TipoUsuarioService
 from service.UsuarioService import UsuarioService
 
 
@@ -7,7 +6,7 @@ class JefeDeMesaController:
     
         
     def __init__(self) :
-        self.tipoUsuarioService = TipoUsuarioService()
+
         self.usuarioService = UsuarioService()
         pass
     
