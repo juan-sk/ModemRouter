@@ -36,23 +36,6 @@ class Application:
     
     
   def mainEventLoop(self):
-    #login        
-    # todo el codigo deberia ir aqui
-    # tickets = self.trepo.obtenerTickets()
-    # for item in tickets:
-    #   print (item)
-    # usuarios = self.uRepo.obtenerUsuarios()
-    # for item in usuarios:
-    #   print (item)
-    # tipoTicket = self.ttRepo.obtenerTipoTickets()
-    # for item in tipoTicket:
-    #   print (item)
-    # areas= self.areaRepo.obtenerAreas()
-    # for item in areas:
-    #   print (item)
-    # criticidades= self.criticidadRepo.obtenerCriticidades()
-    # for item in criticidades:
-    #   print (item)
     gui = Gui()
     gui.gui()
          

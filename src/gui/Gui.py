@@ -1,4 +1,5 @@
 from gui.LoginGui import LoginGui
+from gui.ejecutivoEspecifico.EjecutivoEspecifico import EjecutivoEspecifico
 from gui.ejecutivomesa.EjecutivoMesa import EjecutivoMesa
 from gui.jefemesa.JefeMesa import JefeMesa
 from service.UsuarioService import UsuarioService
@@ -28,4 +29,5 @@ class Gui:
             EjecutivoMesa().start()
         elif usuario.idTipoUsuario ==3:
             print ("inciar gui de ejecutvo especialista")
+            EjecutivoEspecifico.start()
             
