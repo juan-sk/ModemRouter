@@ -2,7 +2,7 @@ from gui.ejecutivomesa.CreaTicket import CreaTicket
 from utils.GuiUtils import GuiUtils
 
 
-class EjecutiviMesa:
+class EjecutivoMesa:
     
     def __init__(self):
        self.creaTicket = CreaTicket()
