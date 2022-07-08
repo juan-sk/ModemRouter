@@ -36,3 +36,23 @@ class JefeDeMesaController:
             logging.error("ocurrio un error guardando el usuario")
             logging.error (error)
             return -1
+        
+    def obtenerUsuarios(self):
+        try:
+            usuarios = self.usuarioService.obtenerUusarios();
+          
+            return usuarios
+        except Exception as error:
+            logging.error("ocurrio un error obteniendo usuarios")
+            logging.error(error)
+            pass
+        
+    def desactivarUusario(self, isUsuario):
+        try:
+            usuarios = self.usuarioService.desactivarUsuario(isUsuario);
+          
+            return usuarios
+        except Exception as error:
+            logging.error("ocurrio un error obteniendo usuarios")
+            logging.error(error)
+            pass

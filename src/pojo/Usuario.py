@@ -36,3 +36,34 @@ class Usuario:
     
             """
         print(MSG%(self.nombreUsuario,self.password,self.dscEstado,self.dscTipoUsuario,self.dscArea))
+    
+    def println(self):
+        print("|%5d | %20s | %9s | %30s | %30s | "
+              %(
+                self.id,
+                self.nombreUsuario,
+                self.dscEstado,
+                self.dscTipoUsuario,
+                self.dscArea
+               ))
+        
+    @staticmethod
+    def fromUsuario(usuario, listaTiposUsuario, area):
+        u = Usuario()
+        u.id = usuario.id
+        u.nombreUsuario = usuario.nombreUsuario
+        for item in listaTiposUsuario:
+            if(item.id == usuario.idTipoUsuario):
+                u.idTipoUsuario = item.id
+                u.dscTipoUsuario = item.nomTipoUsuario
+                break
+        u.idArea = area.id
+        u.dscArea = area.nomArea
+        u.idEstado = usuario.idEstado
+        if usuario.idEstado ==1:
+            u.dscEstado = "Activo"
+        else:
+            u.dscEstado = "Desactivo"
+        return u
+             
+        

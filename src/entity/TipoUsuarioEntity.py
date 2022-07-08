@@ -4,7 +4,7 @@ class TipoUsuarioEntity:
     def __init__(self):
         self.id =0
         self.nomTipoUsuario =""
-        self.dscTipoUsuraio = ""
+        self.dscTipoUsuario = ""
     
     @staticmethod    
     def creaTipoUsuario(resultSet):

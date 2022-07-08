@@ -24,8 +24,10 @@ class GestionarUsuario:
             #  ir a modificar usuario
             print ("ir modificar usuario")
         elif opcionMenu == 3:
+            
             print ("ir a desactivar usuario")
-                        
+            self.desactivarUsuario()
+                     
         return
     
 
@@ -118,6 +120,9 @@ class GestionarUsuario:
         return usuario
         
         
+    def mostrarUusarios(self):
+        print("Lista de usuarios")
+        # buscar usuarios
         
     
     @staticmethod
@@ -130,5 +135,20 @@ class GestionarUsuario:
             print("Area Usuario:")
             
             
+  
+    def desactivarUsuario(self):
+        usuarios = self.jefeDeMesaController.obtenerUsuarios();
+        HEADER = "|  ID  |        Nombre        |  Estado   |          Tipo Usuario          |              Area              |"
+
+        print(HEADER)
+        for us in usuarios:
+            us.println()
         
+        id = int(input("Ingrese el ID del registro a DESACTIVAR: "))
+        
+        desactivado = self.jefeDeMesaController.desactivarUusario(id)
+        if(desactivado):
+            print("el usuario se desactivo correctamente")
+        else:
+            print("el usuario no se desactivo correctamente")
         

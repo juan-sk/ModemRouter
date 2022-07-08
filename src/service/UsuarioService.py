@@ -1,8 +1,9 @@
-from logging import exception
+
 import logging
 from config.Config import Config
 from entity.AreaUsuarioEntity import AreaUsuarioEntity
 from entity.UsuarioEntity import UsuarioEntity
+from pojo.Usuario import Usuario
 from repository.AreaRepository import AreaRepository
 from repository.AreaUsuarioReposotory import AreaUsuarioReposotory
 from repository.TipoUsuarioRepository import TipoUsuarioRepository
@@ -18,6 +19,7 @@ class UsuarioService:
         self.areaUsuarioRepo = AreaUsuarioReposotory()
         self.tipoTiketRepo = TipoUsuarioRepository()
         self._dbConn = Config().DBConnection
+        self.tipoUsuario = TipoUsuarioRepository()
         
     def validarusuario(self, usaurio,password):
         try:
@@ -66,4 +68,27 @@ class UsuarioService:
             logging.error("ocurrio un error en el servicio al obtener los tipos de usuario")
             logging.error(error)
             return []
+        
+    def obtenerUusarios(self):
+        # obtener tipos de usuario
+        tiposUsuario =  self.tipoUsuario.obtenerTipoUsuarios()
+        us = []
+        # obtener usuarios
+        usuariosDB = self.usuarioRepo.obtenerUsuarios()
+        for udb in usuariosDB:
+            area = self.areaRepo.obtenerAreaUsuaio(udb.id)
+            u = Usuario.fromUsuario(udb,tiposUsuario,area)
+            us.append(u)        
+        return us
+    
+    
+    def desactivarUsuario(self, idUsuario):
+        try:
+            
+            return  self.usuarioRepo.desactivarUsuario(idUsuario)
+        except Exception as error:
+            logging.error("ocurrio un error desactivando al usuario")
+            logging.error(error)
+            return False
+        
         

@@ -78,6 +78,26 @@ class UsuarioRepository:
             usuario.idTipoUsuario
         )
         cursor.execute(SQL, val)
+        
+        
+    def desactivarUsuario(self,idUsuario ):
+        
+        cursor =  self._dbConn.cursor()
+        db = self._dbConn
+        SQL = """
+         update tma.usuario set id_estado = 2 where id_usuario = %s
+        """
+        val = (
+            idUsuario,
+           
+        )
+        cursor.execute(SQL, val)
+        
+
+        cursor.close()  
+
+        db.commit()
+        return True
 
         
        
