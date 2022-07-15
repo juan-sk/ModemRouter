@@ -1,4 +1,6 @@
+import logging
 from gui.ejecutivomesa.CreaTicket import CreaTicket
+from gui.ejecutivomesa.VerTickets import VerTickets
 from utils.GuiUtils import GuiUtils
 
 
@@ -10,17 +12,40 @@ class EjecutivoMesa:
     
      
     def start(self):
-        # opciones
-        self.menuOpciones()
-        # self.creaTicket.start()
+        while True:
+            opcion =    self.menuOpciones()
+            
+            if opcion == 1:
+                print("ver Tickets")
+                VerTickets().start()
+            elif opcion ==2:
+                print("Crear tiket")
+                CreaTicket().start()
+            elif opcion == 3:
+                print("salir")
+                return True
+
     def menuOpciones(self):
-        print(GuiUtils.subrrayar("Opcions"))
-        print("1). Ver tickets")
-        print("2). Crear Ticket")
         
-        MSG = """
-        hola
-        como 
-        estas
-        """
-        print(MSG)
+        while True:
+            try:
+                GuiUtils.clearTerminal()
+                print("     Menu Ejecutivo Mesa         ")
+                print("")
+  
+                
+                print(GuiUtils.subrrayar("Opcions"))
+                print("1). Ver tickets")
+                print("2). Crear Ticket")
+                print("3). Salir")
+                opcionesValidas  = [1,2,3]
+                value = int(input("Ingrese Opcion:"))
+                if value in opcionesValidas:
+                    # opcionMenu = value 
+                    return value 
+                else: 
+                    print("ingrese una opcion Valida")
+            except Exception as error :
+                logging.error("ocurio un error en el menu de opciones de gestion de usuario")
+                logging.error(error)
+                print("ocurrio un error con la opcion que ingreso")
