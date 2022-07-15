@@ -1,23 +1,22 @@
-# modemrouter
-Proyecto Inacap 2022 all Left reserved
+# Proyecto Inacap 2022 all Left reserved
 
-modulos a instalar
--python -m pip install mysql-connector-python
--python -m pip install python-dotenv
+## Requisitos para iniciar la aplicación
 
+## Python 3
+### Modulos de Python 3
+```
+python -m pip install mysql-connector-python
+python -m pip install python-dotenv
+```
 
-ejecutar App
-pwd src/
+## Entorno de base de datos con el motor MySql
+### Script de inicialización de la base de datos config/initAppDb.sql"
 
- > python Main.py
+## Configuración de variables de entorno mediante dotenv 
+### ejemplo de archivo config/.env_sample reemplazar el contenido y renombrar por config/.env
 
-Ejemplo archivo .env 
-
-DB_NAME = tma
-DB_USERNAME=root
-DB_PASSWORD=123456
-DB_HOST = localhost
-DB_PORT = 3306
-
-LOG_FILE_PATH=C:\logs\
-LOG_LEVEL = DEBUG
+## Iniciar la aplicación
+### Para iniciar la app se debe correr el archivo de entrada con Python
+```
+python src/Main.py
+```
