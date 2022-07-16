@@ -1,5 +1,6 @@
 import logging
 from service.TicketService import TicketService
+from service.UsuarioService import UsuarioService
 
 
 class EjecutivoMesaController:
@@ -7,6 +8,7 @@ class EjecutivoMesaController:
     
     def __init__(self):
         self.ticketService = TicketService()
+        self.usuarioService = UsuarioService()
 
         pass
     
@@ -24,3 +26,5 @@ class EjecutivoMesaController:
     
     def obtenerTiposTickets(self):
         return self.ticketService.obtenerTiposTickets()
+    def obtenerUsuarios(self, idArea):
+        return self.usuarioService.obtenerUsuarioPorArea(idArea)

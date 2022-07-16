@@ -91,4 +91,10 @@ class UsuarioService:
             logging.error(error)
             return False
         
+    def obtenerUsuarioPorArea(self,idArea):
+        try:
+            return self.usuarioRepo.obtenerUsuariosPorArea(idArea)
+        except Exception as error:
+            logging.error("ocurrio un error al obtener los usuarios por id area")
+            pass
         

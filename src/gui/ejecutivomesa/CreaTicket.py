@@ -1,4 +1,3 @@
-from asyncio.trsock import TransportSocket
 import logging
 
 from controller.EjecutivoMesaController import EjecutivoMesaController
@@ -19,6 +18,7 @@ class CreaTicket:
             logging.info("se comienza guardado del ticket")
             
             self.ejecutivoMesaController.crearTicket(ticket)
+            logging.info("se guardo correctamente el ticket")
         except Exception as error:
             msg = "ocurrio un error al intengar guardar el ticket"
             logging.error(msg)
@@ -39,7 +39,9 @@ class CreaTicket:
         ticket.idUsuarioCreacion = idUsuarioCreacion
         ticket.idCriticidad = self.obtenerCriticidad()
         ticket.idArea  = self.obtenerArea()
-        print(ticket)
+        ticket.idTipoTicket = self.obenerTipoTicket()
+        
+        ticket.idUsuarioDerivado = self.obtenerUsuario(ticket.idArea)
         return ticket
     
     
@@ -113,6 +115,28 @@ class CreaTicket:
                 tipoTicketInt = opcionInt
                 break
         return tipoTicketInt
+    def obtenerUsuario(self,idArea):
+        usuarioDerivado = 0
+        while True:
+            GuiUtils.clearTerminal()
+            print( GuiUtils.subrrayar( " Seleccione el usuario a Derivar Ticket"))
+            
+            usuarios =   self.ejecutivoMesaController.obtenerUsuarios(idArea)
+            opcionesValidas = []
+            for item in usuarios:
+                opcionesValidas.append(item.id)
+                
+                print("%d). %s"%(item.id,item.nombreUsuario))
+            opcion = input(" Ingrese la Opcion: ") 
+            opcionInt = 0
+            try:
+                opcionInt = int(opcion)
+            except Exception :
+                pass
+            if opcionInt in opcionesValidas:
+                usuarioDerivado = opcionInt
+                break
+        return usuarioDerivado
             
                  
                    

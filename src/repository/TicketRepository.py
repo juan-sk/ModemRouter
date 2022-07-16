@@ -35,7 +35,6 @@ class TicketRepository:
             SQL = """
             INSERT INTO
                 `tma`.`ticket` (
-                    `id_ticket`,
                     `nombre_cliente`,
                     `rut_cliente`,
                     `telefono`,
@@ -62,13 +61,11 @@ class TicketRepository:
                 %s,
                 %s,
                 %s,
-                %s,
-                %s,
+                %s
                 );
 
             """
             val = (
-                ticket.idTicket,
                 ticket.nombreCliente,
                 ticket.rutCliente,
                 ticket.telefono,
@@ -83,7 +80,9 @@ class TicketRepository:
                 ticket.idTipoTicket,
                
             )
+            
             cursor.execute(SQL, val)
+            self._dbConn.commit()  
         except Exception as error:
             logging.error("ocurrio un error al guardar el ticket en la base de datos")
             logging.error(error)

@@ -98,6 +98,38 @@ class UsuarioRepository:
 
         db.commit()
         return True
+    
+    def obtenerUsuariosPorArea (self,idArea):
+        try:
+            SQL = """
+            SELECT
+                    u.*
+                FROM
+                    tma.usuario as u
+                    join area_usuario as au on u.id_usuario = au.id_usuario
+                where
+                    u.id_estado = 1
+                    and au.id_area = %s
+            """
+            cursor =  self._dbConn.cursor()
+        
+            val = (
+                idArea,
+            )
+            cursor.execute(SQL,val)
+
+            result= cursor.fetchall()
+            cursor.close()  
+            
+            res = []
+            for item in result:
+                res.append(UsuarioEntity.creaUsuarioEntity(item))
+            return res
+        except Exception as error:
+            logging.error("ocurrio un error al intentar obtener los usuarios")
+            logging.error(error)
+            raise Exception
+        
 
         
        
