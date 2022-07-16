@@ -25,8 +25,9 @@ class Gui:
             print ("inciar gui de jefe de mesa")
             JefeMesa().start()
         elif usuario.idTipoUsuario ==2:
+            idUsuario = usuario.id
             print ("inciar gui de ejecutvo de mesa")
-            EjecutivoMesa().start()
+            EjecutivoMesa().start(idUsuario)
         elif usuario.idTipoUsuario ==3:
             print ("inciar gui de ejecutvo especialista")
             EjecutivoEspecifico.start()

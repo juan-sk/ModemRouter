@@ -11,7 +11,7 @@ class EjecutivoMesa:
     
     
      
-    def start(self):
+    def start(self,idUsuario):
         while True:
             opcion =    self.menuOpciones()
             
@@ -20,7 +20,7 @@ class EjecutivoMesa:
                 VerTickets().start()
             elif opcion ==2:
                 print("Crear tiket")
-                CreaTicket().start()
+                CreaTicket().start(idUsuario)
             elif opcion == 3:
                 print("salir")
                 return True
