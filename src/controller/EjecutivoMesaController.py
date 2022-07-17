@@ -7,8 +7,8 @@ class EjecutivoMesaController:
     
     
     def __init__(self):
-        self.ticketService = TicketService()
-        self.usuarioService = UsuarioService()
+        self.ticketService = TicketService._ticketService
+        self.usuarioService = UsuarioService._usuarioService
 
         pass
     
@@ -28,3 +28,7 @@ class EjecutivoMesaController:
         return self.ticketService.obtenerTiposTickets()
     def obtenerUsuarios(self, idArea):
         return self.usuarioService.obtenerUsuarioPorArea(idArea)
+    
+    @staticmethod
+    def build():
+        EjecutivoMesaController._ejecutivoMesaController = EjecutivoMesaController()

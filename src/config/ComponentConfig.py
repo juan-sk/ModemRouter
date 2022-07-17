@@ -1,4 +1,7 @@
 import logging
+from controller.EjecutivoEspecificoController import EjecutivoEspecificoController
+from controller.EjecutivoMesaController import EjecutivoMesaController
+from controller.JefeDeMesaController import JefeDeMesaController
 from repository.AreaRepository import AreaRepository
 from repository.AreaUsuarioReposotory import AreaUsuarioReposotory
 from repository.CriticidadRepository import CriticidadRepository
@@ -18,7 +21,7 @@ class ComponentConfig:
         logging.info("se crearan los Repositorios")
         ComponentConfig.createRepositories()
         ComponentConfig.createServices()
-        
+        ComponentConfig.createControllers()
         
     @staticmethod
     def createRepositories():
@@ -35,5 +38,9 @@ class ComponentConfig:
     def createServices():
         TicketService.build()
         UsuarioService.build()
-    
-    
+    @staticmethod
+    def createControllers():
+        EjecutivoEspecificoController.build()
+        EjecutivoMesaController.build()
+        JefeDeMesaController.build()
+        UsuarioService.build()

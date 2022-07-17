@@ -7,8 +7,7 @@ class JefeDeMesaController:
         
     def __init__(self) :
 
-        self.usuarioService = UsuarioService()
-        pass
+        self.usuarioService = UsuarioService._usuarioService
     
     def obtenerTiposUsuario(self):
         try:
@@ -56,3 +55,7 @@ class JefeDeMesaController:
             logging.error("ocurrio un error obteniendo usuarios")
             logging.error(error)
             pass
+        
+    @staticmethod
+    def build():
+        JefeDeMesaController._jefeDeMesaController = JefeDeMesaController()
