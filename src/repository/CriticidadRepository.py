@@ -28,3 +28,6 @@ class CriticidadRepository:
             logging.error("ocurrio un error al intentar obtener las criticidades")
             logging.error(error)
             raise Exception
+    @staticmethod
+    def build():
+        CriticidadRepository._criticidadRepository = CriticidadRepository()

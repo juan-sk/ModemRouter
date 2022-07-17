@@ -26,3 +26,6 @@ class EstadoUsuarioRepository:
             logging.error("ocurrio un error al intentar obtener los estados de usuario")
             logging.error(error)
             raise Exception
+    @staticmethod
+    def build():
+        EstadoUsuarioRepository._estadoUsuarioRepository =EstadoUsuarioRepository()

@@ -26,3 +26,6 @@ class TipoTicketRepository:
             logging.error("ocurrio un error al intentar obtener los tipos de ticket")
             logging.error(error)
             raise Exception       
+    @staticmethod
+    def build():
+        TipoTicketRepository._tipoTicketRepository = TipoTicketRepository()

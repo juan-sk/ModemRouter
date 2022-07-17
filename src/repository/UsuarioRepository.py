@@ -129,7 +129,9 @@ class UsuarioRepository:
             logging.error("ocurrio un error al intentar obtener los usuarios")
             logging.error(error)
             raise Exception
-        
+    @staticmethod
+    def build():
+        UsuarioRepository._usuarioRepository = UsuarioRepository()    
 
         
        

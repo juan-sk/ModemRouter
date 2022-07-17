@@ -26,3 +26,6 @@ class TipoUsuarioRepository:
             logging.error("ocurrio un error al intentar obtener los tipos de usuario")
             logging.error(error)
             raise Exception
+    @staticmethod
+    def build():
+        TipoUsuarioRepository.tipoUsuarioRepository = TipoUsuarioRepository()

@@ -180,4 +180,7 @@ class TicketRepository:
             logging.error("ocurrio un error al intentar obtener los tickets")
             logging.error(error)
             raise Exception
+    @staticmethod
+    def build():
+        TicketRepository._ticketRepository = TicketRepository()    
         

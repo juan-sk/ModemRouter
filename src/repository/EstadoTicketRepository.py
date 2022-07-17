@@ -26,3 +26,6 @@ class EstadoTicketRepository:
             logging.error("ocurrio un error al intentar obtener los estados del ticket")
             logging.error(error)
             raise Exception
+    @staticmethod
+    def build():
+        EstadoTicketRepository._estadoTicketRepository = EstadoTicketRepository()

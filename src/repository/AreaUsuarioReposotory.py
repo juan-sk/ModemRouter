@@ -39,4 +39,7 @@ class AreaUsuarioReposotory:
             areaUsuario.idUsuario,
             areaUsuario.idArea
         )
-        cursor.execute(SQL, val)            
+        cursor.execute(SQL, val)   
+    @staticmethod
+    def build():
+        AreaUsuarioReposotory._areaUsuarioReposotory = AreaUsuarioReposotory()

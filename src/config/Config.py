@@ -1,5 +1,6 @@
 from distutils.command.config import config
 import logging
+from config.ComponentConfig import ComponentConfig
 from config.DBConection import DBConnection
 from config.Env import Env
 from config.LogConfig import LogConfig
@@ -17,6 +18,9 @@ class Config:
         # conectar db
         logging.info("configurando db")
         Config.DBConnection = DBConnection.conectarDB()
+        
+        logging.info("configurando componentes")
+        ComponentConfig.createComponents()
         
     
      

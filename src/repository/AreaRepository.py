@@ -47,3 +47,6 @@ class AreaRepository:
             logging.error("ocurrio un error al intentar obtener las areas")
             logging.error(error)
             raise Exception
+    @staticmethod
+    def build():
+        AreaRepository._areaRepository = AreaRepository()
