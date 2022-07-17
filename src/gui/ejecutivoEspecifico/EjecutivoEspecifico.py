@@ -1,5 +1,4 @@
 import logging
-from gui.ejecutivoEspecifico.VisualizarTicket import VisualizarTicket
 from gui.ejecutivoEspecifico.MostrarTicket import  MostrarTicket
 from utils.GuiUtils import GuiUtils
 
@@ -18,9 +17,12 @@ class EjecutivoEspecifico:
         self.menuOpciones(idUsuario)
         
     def menuOpciones(self,idUsuario):
-        opcion = self.opciones()
-        if opcion == 1:
-            self.mostrarTicket.start(idUsuario)
+        while True:
+            opcion = self.opciones()
+            if opcion == 1:
+                self.mostrarTicket.start(idUsuario)
+            elif opcion == 2:
+                break
 
             
     def opciones(self):
@@ -30,11 +32,11 @@ class EjecutivoEspecifico:
                 print("     Ejecutivo Especifico         ")
 
                 print (GuiUtils.subrrayar(" Opciones "))
-                opcionesValidas  = [1,2,3]
+                opcionesValidas  = [1,2]
                 print("")
                 print ("1). Visualizar ticket")
-                print ("2). Agregar observacion")
-                print ("3). Cerrar ticket")
+                print ("2). Cerrar Sesion")
+
                 print ("")
                 value = int(input("Ingrese Opcion:"))
                 if value in opcionesValidas:

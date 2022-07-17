@@ -33,3 +33,4 @@ class Gui:
             print ("inciar gui de ejecutvo especialista")
             EjecutivoEspecifico().start(idUsuario)
             
+        print("hasta Luego %s"%usuario.nombreUsuario)

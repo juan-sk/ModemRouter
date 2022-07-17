@@ -1,6 +1,7 @@
 import logging
 from controller.EjecutivoEspecificoController import EjecutivoEspecificoController
 from entity.TicketEntity import TicketEntity
+from utils.GuiInputUtils import GuiInputUtils
 from utils.GuiUtils import GuiUtils 
 
 class MostrarTicket:
@@ -10,7 +11,9 @@ class MostrarTicket:
         pass
     
     def start(self,idUsuario):
-        # print("se inicia la vizualizacion de los ticket")
+
+        self.visualizarTickets(idUsuario)
+    def visualizarTickets(self, idUsuario):
         tickets = self.ejecutivoEspecificoController.obtenerTicketsAsignados(idUsuario)
 
    
@@ -28,6 +31,9 @@ class MostrarTicket:
         ticketEntity =   TicketEntity.fromTicket(ticket)
         self.ejecutivoEspecificoController.guardarTicket(ticketEntity)
         print("el ticket fue guardado")
+        input("Presione Enter para Continuar ...")
+        
+        
     def seleccionarEstadoTicket(self, estadosTicket):
         GuiUtils.clearTerminal()
         while True:
