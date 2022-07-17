@@ -25,4 +25,4 @@ class TipoTicketRepository:
         except Exception as error:
             logging.error("ocurrio un error al intentar obtener los tipos de ticket")
             logging.error(error)
-            raise Exception
+            raise Exception       

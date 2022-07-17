@@ -1,6 +1,6 @@
 import logging
 from gui.ejecutivoEspecifico.VisualizarTicket import VisualizarTicket
-from gui.ejecutivoEspecifico.AgregarObservacion import AgregarObservacion
+from gui.ejecutivoEspecifico.MostrarTicket import  MostrarTicket
 from utils.GuiUtils import GuiUtils
 
 
@@ -8,21 +8,20 @@ class EjecutivoEspecifico:
     
     
     def __init__(self):
-        self.visualizarTicket = VisualizarTicket()
-        self.agregarObserbacion = AgregarObservacion()
+        self.mostrarTicket = MostrarTicket()
+
         pass
     
-    def start(self):
+    def start(self,idUsuario):
         print("inicio el menu de ejecutivo de mesa")
         GuiUtils.clearTerminal()
-        self.menuOpciones()
+        self.menuOpciones(idUsuario)
         
-    def menuOpciones(self):
+    def menuOpciones(self,idUsuario):
         opcion = self.opciones()
         if opcion == 1:
-            self.visualizarTicket.start()
-        elif opcion == 2:
-            self.agregarObserbacion.start()
+            self.mostrarTicket.start(idUsuario)
+
             
     def opciones(self):
         while True:

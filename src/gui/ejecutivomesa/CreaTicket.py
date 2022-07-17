@@ -1,6 +1,7 @@
 import logging
 
 from controller.EjecutivoMesaController import EjecutivoMesaController
+from entity.TicketEntity import TicketEntity
 from pojo.Ticket import Ticket
 from utils.GuiUtils import GuiUtils
 
@@ -28,14 +29,13 @@ class CreaTicket:
         GuiUtils.clearTerminal()
         print("Creacion de Ticket")
         
-        ticket = Ticket()
+        ticket = TicketEntity()
         
         ticket.nombreCliente = input("Ingrese Nombre Cliente: ")
         ticket.rutCliente = input("Ingrese Rut Cliente: ")
         ticket.telefono = input("Ingrese Telefono Cliente: ")
         ticket.detalle = input("Ingrese Detalle para el Ticket: ")
         ticket.idEstado = 1
-        ticket.nomEstado = "Activo"
         ticket.idUsuarioCreacion = idUsuarioCreacion
         ticket.idCriticidad = self.obtenerCriticidad()
         ticket.idArea  = self.obtenerArea()

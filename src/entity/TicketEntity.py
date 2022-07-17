@@ -1,5 +1,4 @@
 from datetime import datetime
-from unittest import result
 
 
 class TicketEntity:
@@ -11,11 +10,12 @@ class TicketEntity:
         self.telefono=""
         self.detalle=""
         self.observacion=""
-        self.estado=0
-        self.fechaCreacion = datetime.datetime.now()
+        self.idEstado=0
+        self.fechaCreacion = datetime.now()
         self.idUsuarioCreacion = 0
         self.idUsuarioDerivado = 0
         self.idCriticidad = 0
+        self.idArea = 0
         self.idTipoTicket = 0
     @staticmethod    
     def creaTicketEntity(resultSet):
@@ -31,7 +31,24 @@ class TicketEntity:
         t.idUsuarioCreacion = resultSet[8]
         t.idUsuarioDerivado = resultSet[9]
         t.idCriticidad = resultSet[10]
-        t.idTipoTicket = resultSet[11]
+        t.idArea = resultSet[11]
+        t.idTipoTicket = resultSet[12]
+        return t
+    def fromTicket(tt):
+        t = TicketEntity()
+        t.id  = tt.idTicket
+        t.nombreCliente = tt.nombreCliente
+        t.rutCliente = tt.rutCliente
+        t.telefono = tt.telefono
+        t.detalle = tt.detalle
+        t.observacion = tt.observacion
+        t.idEstado = tt.idEstado
+        t.fechaCreacion = tt.fechaCreacion
+        t.idUsuarioCreacion = tt.idUsuarioCreacion
+        t.idUsuarioDerivado = tt.idUsuarioDerivado
+        t.idCriticidad = tt.idCriticidad
+        t.idArea = tt.idArea
+        t.idTipoTicket = tt.idTipoTicket
         return t
     
     def __str__(self):

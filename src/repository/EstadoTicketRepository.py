@@ -20,7 +20,7 @@ class EstadoTicketRepository:
             
             res = []
             for item in result:
-                res.append(EstadoTicketEntity.creaTicketEntity(item))
+                res.append(EstadoTicketEntity.creaEstadoTicket(item))
             return res
         except Exception as error:
             logging.error("ocurrio un error al intentar obtener los estados del ticket")
