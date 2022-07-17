@@ -8,6 +8,8 @@ from repository.TicketRepository import TicketRepository
 from repository.TipoTicketRepository import TipoTicketRepository
 from repository.TipoUsuarioRepository import TipoUsuarioRepository
 from repository.UsuarioRepository import UsuarioRepository
+from service.TicketService import TicketService
+from service.UsuarioService import UsuarioService
 
 
 class ComponentConfig:
@@ -15,6 +17,7 @@ class ComponentConfig:
     def createComponents():
         logging.info("se crearan los Repositorios")
         ComponentConfig.createRepositories()
+        ComponentConfig.createServices()
         
         
     @staticmethod
@@ -28,3 +31,9 @@ class ComponentConfig:
         TipoTicketRepository.build()
         TipoUsuarioRepository.build()
         UsuarioRepository.build()
+    @staticmethod
+    def createServices():
+        TicketService.build()
+        UsuarioService.build()
+    
+    

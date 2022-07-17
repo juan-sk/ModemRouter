@@ -10,11 +10,11 @@ from repository.TipoTicketRepository import TipoTicketRepository
 class TicketService:
     
     def __init__(self):
-        self.ticketRepo = TicketRepository()
-        self.criticidadRepo = CriticidadRepository()
-        self.areaRepo = AreaRepository()
-        self.tipoTicketRepo = TipoTicketRepository()
-        self.estadoTicket = EstadoTicketRepository()
+        self.ticketRepo = TicketRepository._ticketRepository
+        self.criticidadRepo = CriticidadRepository._criticidadRepository
+        self.areaRepo = AreaRepository._areaRepository
+        self.tipoTicketRepo = TipoTicketRepository._tipoTicketRepository
+        self.estadoTicket = EstadoTicketRepository._estadoTicketRepository
         
         
     def guardarTicket(self,ticket):
@@ -37,8 +37,9 @@ class TicketService:
         return tickets
     def obtenerEstadosTicket(self):
         return self.estadoTicket.obtenerEstadosTicket()
-                
         
-
+    @staticmethod
+    def build():
+        TicketService._ticketService = TicketService()
              
     

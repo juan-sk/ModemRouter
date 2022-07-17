@@ -14,12 +14,11 @@ class UsuarioService:
     
     
     def __init__(self):
-        self.usuarioRepo = UsuarioRepository()
-        self.areaRepo = AreaRepository()
-        self.areaUsuarioRepo = AreaUsuarioReposotory()
-        self.tipoTiketRepo = TipoUsuarioRepository()
+        self.usuarioRepo = UsuarioRepository._usuarioRepository
+        self.areaRepo = AreaRepository._areaRepository
+        self.areaUsuarioRepo = AreaUsuarioReposotory._areaUsuarioReposotory
+        self.tipoUsuario = TipoUsuarioRepository._tipoUsuarioRepository
         self._dbConn = Config().DBConnection
-        self.tipoUsuario = TipoUsuarioRepository()
         
     def validarusuario(self, usaurio,password):
         try:
@@ -62,7 +61,7 @@ class UsuarioService:
     def obtenerTiposDeUsuario(self):
         
         try:
-            tiposUsuario = self.tipoTiketRepo.obtenerTipoUsuarios()
+            tiposUsuario = self.tipoUsuario.obtenerTipoUsuarios()
             return tiposUsuario
         except Exception as error:
             logging.error("ocurrio un error en el servicio al obtener los tipos de usuario")
@@ -97,4 +96,6 @@ class UsuarioService:
         except Exception as error:
             logging.error("ocurrio un error al obtener los usuarios por id area")
             pass
-        
+    @staticmethod
+    def build():
+        UsuarioService._usuarioService = UsuarioService()
