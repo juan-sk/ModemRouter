@@ -1,6 +1,6 @@
 import logging
-from gui.ejecutivomesa.CreaTicket import CreaTicket
-from gui.ejecutivomesa.VerTickets import VerTickets
+from gui.ejecutivomesa.opciones.CreaTicket import CreaTicket
+from gui.ejecutivomesa.opciones.VerTickets import VerTickets
 from utils.GuiUtils import GuiUtils
 
 

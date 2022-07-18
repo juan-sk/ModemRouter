@@ -1,7 +1,7 @@
-from gui.jefemesa.ConsultaTickets import ConsultaTickets
-from gui.jefemesa.GestionarAreas import GestionarAreas
-from gui.jefemesa.GestionarTiposTicket import GestionarTiposTicket
-from gui.jefemesa.GestionarUsuario import GestionarUsuario
+from gui.jefemesa.opciones.ConsultaTickets import ConsultaTickets
+from gui.jefemesa.opciones.GestionarAreas import GestionarAreas
+from gui.jefemesa.opciones.GestionarTiposTicket import GestionarTiposTicket
+from gui.jefemesa.opciones.GestionarUsuario import GestionarUsuario
 from utils.GuiInputUtils import GuiInputUtils
 from utils.GuiUtils import GuiUtils
 

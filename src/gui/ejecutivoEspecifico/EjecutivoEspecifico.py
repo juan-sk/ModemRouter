@@ -1,5 +1,5 @@
 import logging
-from gui.ejecutivoEspecifico.MostrarTicket import  MostrarTicket
+from gui.ejecutivoEspecifico.opciones.MostrarTicket import  MostrarTicket
 from utils.GuiUtils import GuiUtils
 
 
