@@ -1,5 +1,6 @@
 
 import logging
+from entity.UsuarioEntity import UsuarioEntity
 from service.UsuarioService import UsuarioService
 
 
@@ -17,8 +18,7 @@ class LoginController:
             return usuario
         except Exception as error:
             logging.error(error)
-            # se retorna null 
-            pass
+            return UsuarioEntity()
     @staticmethod
     def build():
         UsuarioService._usuarioService = UsuarioService()

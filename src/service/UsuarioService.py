@@ -12,7 +12,7 @@ from repository.UsuarioRepository import UsuarioRepository
 
 class UsuarioService:
     
-    
+
     def __init__(self):
         self.usuarioRepo = UsuarioRepository._usuarioRepository
         self.areaRepo = AreaRepository._areaRepository
@@ -96,6 +96,7 @@ class UsuarioService:
         except Exception as error:
             logging.error("ocurrio un error al obtener los usuarios por id area")
             pass
+
     @staticmethod
     def build():
         UsuarioService._usuarioService = UsuarioService()

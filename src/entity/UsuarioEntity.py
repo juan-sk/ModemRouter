@@ -1,3 +1,6 @@
+from types import NoneType
+
+
 class UsuarioEntity:
     
     def __init__(self) :
@@ -10,11 +13,12 @@ class UsuarioEntity:
     @staticmethod    
     def creaUsuarioEntity(resultSet):
         u = UsuarioEntity()
-        u.id  = resultSet[0]
-        u.nombreUsuario = resultSet[1]
-        u.password = resultSet[2]
-        u.idEstado = resultSet[3]
-        u.idTipoUsuario = resultSet[4]
+        if resultSet !=None:
+            u.id  = resultSet[0]
+            u.nombreUsuario = resultSet[1]
+            u.password = resultSet[2]
+            u.idEstado = resultSet[3]
+            u.idTipoUsuario = resultSet[4]
         return u
     @staticmethod
     def fromUsuario(usuario):

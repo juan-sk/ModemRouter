@@ -32,14 +32,13 @@ class Application:
     while True:
       self.mainEventLoop()
       value = value+1
-      if(value >=1):
+      if(value >=10):
         break   
     self.stop()
     
     
   def mainEventLoop(self):
-    gui = Gui()
-    gui.gui()
+    Gui().gui()
          
         
         

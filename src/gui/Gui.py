@@ -1,3 +1,4 @@
+import logging
 from gui.LoginGui import LoginGui
 from gui.ejecutivoEspecifico.EjecutivoEspecifico import EjecutivoEspecifico
 from gui.ejecutivomesa.EjecutivoMesa import EjecutivoMesa
@@ -18,6 +19,8 @@ class Gui:
         
         
     def gui(self):
+      
+                
         self.mensajeBienvenida()
         usuario = self.loginGui.login()
         idUsuario = usuario.id
@@ -26,7 +29,7 @@ class Gui:
             print ("inciar gui de jefe de mesa")
             JefeMesa().start()
         elif usuario.idTipoUsuario ==2:
-          
+        
             print ("inciar gui de ejecutvo de mesa")
             EjecutivoMesa().start(idUsuario)
         elif usuario.idTipoUsuario ==3:
