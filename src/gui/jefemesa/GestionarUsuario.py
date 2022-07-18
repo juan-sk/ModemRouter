@@ -14,7 +14,7 @@ class GestionarUsuario:
 
     
 
-    def gestionarUsuario(self):
+    def start(self):
         opcionMenu = self.menuOpciones()
         if opcionMenu == 1:
             # ir a crear usuario
