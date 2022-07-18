@@ -17,3 +17,12 @@ class AreaEntity:
     
     def __str__(self):
         return "AreaEntity(id:"+str(self.id)+ ", nomArea:"+str(self.nomArea)+", dscArea:"+str(self.dscArea)+")"
+    
+    def print(self):
+        a = """
+        Detalle Area 
+        
+        Nombre Area     :%s
+        Descripcion Area:%s
+        """%(self.nomArea,self.dscArea)
+        print(a)

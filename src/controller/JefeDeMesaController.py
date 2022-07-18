@@ -1,4 +1,5 @@
 import logging
+from service.TicketService import TicketService
 from service.UsuarioService import UsuarioService
 
 
@@ -8,7 +9,10 @@ class JefeDeMesaController:
     def __init__(self) :
 
         self.usuarioService = UsuarioService._usuarioService
-    
+        self.ticketService = TicketService._ticketService
+    def guardarArea(self,areaEntity):
+        return self.ticketService.guardarArea(areaEntity)
+        
     def obtenerTiposUsuario(self):
         try:
             logging.info("se inicia la obtencion de tipos de usuario")

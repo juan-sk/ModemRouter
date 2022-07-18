@@ -30,6 +30,28 @@ class AreaRepository:
             logging.error(error)
             raise Exception
         
+    def guardarArea(self, areaEntity):
+        try:
+            cursor =  self._dbConn.cursor()
+            SQL = """
+            INSERT INTO
+                `tma`.`area` ( `nom_area`, `dsc_area`)
+            VALUES
+                (%s , %s)
+
+            """
+            val = (
+                areaEntity.nomArea,
+                areaEntity.dscArea,               
+            )
+            
+            cursor.execute(SQL, val)
+            self._dbConn.commit()  
+        except Exception as error:
+            logging.error("ocurrio un error al guardar el Area")
+            logging.error(error)
+            raise error
+            
     def obtenerAreaUsuaio(self,idUsuario):
         try:
             SQL = "SELECT distinct(a.id_area), nom_area, dsc_area FROM tma.area as a left join tma.area_usuario as au on a.id_area = au.id_area where au.id_usuario = %s "

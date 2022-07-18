@@ -37,7 +37,8 @@ class TicketService:
         return tickets
     def obtenerEstadosTicket(self):
         return self.estadoTicket.obtenerEstadosTicket()
-        
+    def guardarArea(self,areaEntity):
+        return self.areaRepo.guardarArea(areaEntity)     
     @staticmethod
     def build():
         TicketService._ticketService = TicketService()
