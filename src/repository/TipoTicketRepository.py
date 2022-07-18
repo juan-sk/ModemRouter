@@ -6,7 +6,7 @@ from entity.TipoTicketEntity import TipoTicketEntity
 class TipoTicketRepository:
     
     def __init__(self):
-        self._dbConn = Config().DBConnection
+        self._dbConn = Config._dbConnection
         
     def obtenerTipoTickets(self):
         try:

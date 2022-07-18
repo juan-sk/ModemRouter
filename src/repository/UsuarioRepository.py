@@ -6,7 +6,7 @@ from entity.UsuarioEntity import UsuarioEntity
 class UsuarioRepository:
     
     def __init__(self):
-        self._dbConn = Config().DBConnection
+        self._dbConn = Config._dbConnection
         
     def obtenerUsuarios(self):
         try:

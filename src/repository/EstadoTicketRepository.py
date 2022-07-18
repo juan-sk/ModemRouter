@@ -6,7 +6,7 @@ from entity.EstadoTicketEntity import EstadoTicketEntity
 class EstadoTicketRepository:
     
     def __init__(self):
-        self._dbConn = Config().DBConnection
+        self._dbConn = Config._dbConnection
     
     def obtenerEstadosTicket(self):
         try:

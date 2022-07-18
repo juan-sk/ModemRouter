@@ -7,7 +7,9 @@ from entity.TicketEntity import TicketEntity
 class AreaRepository:
     
     def __init__(self):
-        self._dbConn = Config().DBConnection
+        # if AreaRepository._areaRepository != None:
+        #     raise Exception("AreaRepository ya ha sido iniciado antes")
+        self._dbConn = Config._dbConnection
         
     def obtenerAreas(self):
         try:

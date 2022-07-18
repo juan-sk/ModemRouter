@@ -8,7 +8,7 @@ from entity.TicketEntity import TicketEntity
 class CriticidadRepository:
     
     def __init__(self):
-        self._dbConn = Config().DBConnection
+        self._dbConn = Config._dbConnection
         
     def obtenerCriticidades(self):
         try:

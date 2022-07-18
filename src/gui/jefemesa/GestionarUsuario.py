@@ -10,7 +10,7 @@ from utils.GuiUtils import GuiUtils
 class GestionarUsuario:
     
     def __init__(self ):
-        self.jefeDeMesaController = JefeDeMesaController()
+        self.jefeDeMesaController = JefeDeMesaController._jefeDeMesaController
 
     
 

@@ -18,7 +18,7 @@ class UsuarioService:
         self.areaRepo = AreaRepository._areaRepository
         self.areaUsuarioRepo = AreaUsuarioReposotory._areaUsuarioReposotory
         self.tipoUsuario = TipoUsuarioRepository._tipoUsuarioRepository
-        self._dbConn = Config().DBConnection
+        self._dbConn = Config._dbConnection
         
     def validarusuario(self, usaurio,password):
         try:

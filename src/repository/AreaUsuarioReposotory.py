@@ -6,7 +6,7 @@ from entity.AreaUsuarioEntity import AreaUsuarioEntity
 class AreaUsuarioReposotory:
     
     def __init__(self):
-        self._dbConn = Config().DBConnection
+        self._dbConn = Config._dbConnection
         
     def obtenerAreasUsuarios(self):
         try:

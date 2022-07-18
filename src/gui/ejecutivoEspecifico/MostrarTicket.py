@@ -7,7 +7,7 @@ from utils.GuiUtils import GuiUtils
 class MostrarTicket:
     
     def __init__(self):
-        self.ejecutivoEspecificoController = EjecutivoEspecificoController()
+        self.ejecutivoEspecificoController = EjecutivoEspecificoController._ejecutivoEspecificoController
         pass
     
     def start(self,idUsuario):

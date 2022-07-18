@@ -7,7 +7,7 @@ from pojo.Ticket import Ticket
 class TicketRepository:
     
     def __init__(self):
-        self._dbConn = Config().DBConnection
+        self._dbConn = Config._dbConnection
         
     def obtenerTickets(self):
         try:

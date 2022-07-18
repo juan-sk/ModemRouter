@@ -9,7 +9,7 @@ from utils.GuiUtils import GuiUtils
 class CreaTicket:
     
     def __init__(self):
-        self.ejecutivoMesaController = EjecutivoMesaController()
+        self.ejecutivoMesaController = EjecutivoMesaController._ejecutivoMesaController
     
     
     def start(self,idUsuarioCreacion):

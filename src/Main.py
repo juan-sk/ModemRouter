@@ -1,7 +1,8 @@
 from asyncio.log import logger
 import logging
+from config.ComponentConfig import ComponentConfig
 from config.Config import Config
-from config.DBConection import DBConnection
+from config.DBConection import DbConnection
 from gui.Gui import Gui
 from repository.AreaRepository import AreaRepository
 from repository.CriticidadRepository import CriticidadRepository
@@ -14,7 +15,8 @@ from repository.UsuarioRepository import UsuarioRepository
 class Application:
       
   def __init__(self):
-    Config().configurar()
+    Config.configurar()
+    ComponentConfig.createComponents()
     logging.info("########### [INICIO DE LA APLICACION] ###############")
     logging.info("configurando dependencias")
     self.trepo = TicketRepository()
@@ -43,7 +45,7 @@ class Application:
         
         
   def stop(self):
-    DBConnection.close()
+    DbConnection.close()
     logging.info("########### [FIN DE LA APLICACION] ###############")
     
             
