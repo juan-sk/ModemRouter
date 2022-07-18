@@ -37,7 +37,7 @@ class EjecutivoMesa:
                 print(GuiUtils.subrrayar("Opcions"))
                 print("1). Ver tickets")
                 print("2). Crear Ticket")
-                print("3). Salir")
+                print("3). Cerrar Secion")
                 opcionesValidas  = [1,2,3]
                 value = int(input("Ingrese Opcion:"))
                 if value in opcionesValidas:
