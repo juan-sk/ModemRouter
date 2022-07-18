@@ -27,7 +27,8 @@ class GestionarUsuario:
             
             print ("ir a desactivar usuario")
             self.desactivarUsuario()
-                     
+        elif opcionMenu ==4:
+            pass             
         return
     
 
@@ -38,11 +39,12 @@ class GestionarUsuario:
                 print("     Gestion de usuario         ")
 
                 print (GuiUtils.subrrayar(" Opciones "))
-                opcionesValidas  = [1,2,3]
+                opcionesValidas  = [1,2,3,4]
                 print("")
                 print ("1). Crea Usuario")
                 print ("2). Modifica Usuario")
                 print ("3). Desactiva Usuario")
+                print ("4). Atras")
                 print ("")
                 value = int(input("Ingrese Opcion:"))
                 if value in opcionesValidas:
@@ -63,6 +65,7 @@ class GestionarUsuario:
             print("     Creacion de usuario         ")
             print("")
             usuario = self.formularioCreacionUsuario()
+            GuiUtils.clearTerminal()
             usuario.print()
             
             print(" ¿Los valores para el Usuario son Correctos? (Si,No)")
@@ -78,6 +81,7 @@ class GestionarUsuario:
             print("el usuario fue creado Correctamente")
         else:
             print("Ocurrio Un error Al Crear El Usuario")
+        input("presione Enter para continuar")
             
     
     def formularioCreacionUsuario(self):
@@ -85,7 +89,7 @@ class GestionarUsuario:
         nombreUsuario = input("Nombre de usuario:")
         print("Contraseña del usaurio")
         passwordUsuario =  getpass.getpass()
-        
+        GuiUtils.clearTerminal()
         print("Ingrese el tipo de usuario ")
         print("")
         print(GuiUtils.subrrayar(" Opciones "))
