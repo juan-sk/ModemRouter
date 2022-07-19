@@ -17,13 +17,24 @@ create table criticidad(
     nom_criticidad varchar(250),
     dsc_criticidad varchar(250)
 );
+INSERT INTO criticidad (id_criticidad, nom_criticidad, dsc_criticidad)
+VALUES
+    (1, "Baja", "El sistema puede funcionar sin impactar la operación"),
+    (2, "Media", "La operación del sistema se ve impacatada"),
+    (3, "Alta", "El sistema no puede operar");
+
 DROP TABLE IF EXISTS `area`;
 create table area(
-
     id_area int primary key auto_increment,
     nom_area varchar(250),
     dsc_area varchar(250)
 );
+INSERT INTO criticidad (id_criticidad, nom_criticidad, dsc_criticidad)
+VALUES
+    (1, "Marketing", "Área encargada de la publicidad y relaciones publicas de la empresa"),
+    (2, "TI", "Área encarga del soporte informatico interno"),
+    (3, "Finanzas", "Área encargada de la contabilidad de la empresa}"),
+    (4, "Recursos humanos", "Área encargada de adminsitrar el capital humano de la empresa");
 
 -- Tablas relacionadas a usuarios
 -- tipo_usuario
@@ -35,11 +46,12 @@ create table tipo_usuario(
     nom_tipo_usuario varchar(250),
     dsc_tipo_usuario varchar(250)
 );
-INSERT INTO tipo_usuario (nom_tipo_usuario, dsc_tipo_usuario)
+INSERT INTO tipo_usuario (id_tipo_usuario, nom_tipo_usuario, dsc_tipo_usuario)
 VALUES
-	("root", "Acceso completo del sistema"),
-	("administrador", "Usuario administrador del sistema, cuenta con acceso privilegiado al sistema"),
-	("ejecutivo", "Usuario del sistema, cuenta con acceso restringido");
+	(0, "root", "Acceso completo del sistema"),
+	(1, "Jefe de mesa", "Usuario administrador del sistema, cuenta con acceso privilegiado al sistema"),
+	(2, "Ejecutivo de mesa", "Usuario del sistema, cuenta con acceso restringido, puede generar tickets"),
+    (3, "ejecutivo espefico", "Usuario del sistema, cuenta con acceso restringido, puede gestionar ticket");
 DROP TABLE IF EXISTS `estado_usuario`;
 create table estado_usuario(
     id_estado int primary key auto_increment,
@@ -48,8 +60,8 @@ create table estado_usuario(
 );
 INSERT INTO estado_usuario (nom_estado, dsc_estado)
 VALUES
-	("activo", "Usuario activo en el sistema"),
-	("inactivo", "Usuario inactivo en el sistema");
+	(1, "activo", "Usuario activo en el sistema"),
+	(2, "inactivo", "Usuario inactivo en el sistema");
 DROP TABLE IF EXISTS `usuario`;
 create table usuario(
     id_usuario int primary key auto_increment,
@@ -58,13 +70,18 @@ create table usuario(
     id_estado int,
     id_tipo_usuario int
 );
+
+-- Tipos de usuario 1, 2, 3
+-- Jefe de mesa
+-- Ejecutivo de mesa
+-- Ejecutivo espefico
 INSERT INTO usuario (nombre_usuario, password, id_estado, id_tipo_usuario)
 VALUES
-	("toor", "root", 1, 1),
+	("root", "toor", 1, 1),
 	("aliagapato", "root", 1, 2),
 	("sandrocksusana", "root", 1, 2),
-	("sandrockjuan", "root", 1, 2),
-	("arriagadavanessa", "root", 1, 2);
+	("sandrockjuan", "root", 1, 3),
+	("arriagadavanessa", "root", 1, 3);
 -- Tablas relacionadas a tickets
 -- tipo_ticket
 -- estado_ticket
@@ -72,9 +89,15 @@ VALUES
 DROP TABLE IF EXISTS `tipo_ticket`;
 create table tipo_ticket(
     id_tipo_ticket int primary key auto_increment,
-    nom_area varchar(250),
+    nom_tipo_ticket varchar(250),
     dsc_tipo_ticket varchar(250)
 );
+INSERT INTO tipo_ticket(id_tipo_ticket, nom_tipo_ticket, dsc_tipo_ticket)
+VALUES
+    (1, "Felicitación", "Se desea felicitar a algun funcionario o proceso de la empresa"),
+    (2, "Consulta", "Se desea consultar alguna información en particular"),
+    (3, "Reclamo", "Se desea reclamar por algun funcionario o proceso de la empresa"),
+    (4, "Problema", "Se desea reportar un problema de funcionamiento");
 DROP TABLE IF EXISTS `estado_ticket`;
 create table estado_ticket(
     id_estado_ticket int primary key auto_increment,
@@ -95,8 +118,8 @@ create table ticket(
     id_usuario_derivado int,
     id_criticidad int,
     id_area int,
-    id_tipo_ticket int
-    
+    id_tipo_ticket int,
+    correo_electronico varchar(250)    
 );
 
 -- Relaciones de la tabla usuario
