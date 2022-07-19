@@ -8,6 +8,7 @@ class TicketEntity:
         self.nombreCliente=""
         self.rutCliente=""
         self.telefono=""
+        self.correoElectronico = ""
         self.detalle=""
         self.observacion=""
         self.idEstado=0
@@ -24,15 +25,16 @@ class TicketEntity:
         t.nombreCliente = resultSet[1]
         t.rutCliente = resultSet[2]
         t.telefono = resultSet[3]
-        t.detalle = resultSet[4]
-        t.observacion = resultSet[5]
-        t.estado = resultSet[6]
-        t.fechaCreacion = resultSet[7]
-        t.idUsuarioCreacion = resultSet[8]
-        t.idUsuarioDerivado = resultSet[9]
-        t.idCriticidad = resultSet[10]
-        t.idArea = resultSet[11]
-        t.idTipoTicket = resultSet[12]
+        t.correoElectronico=resultSet[4]
+        t.detalle = resultSet[5]
+        t.observacion = resultSet[6]
+        t.idEstado = resultSet[7]
+        t.fechaCreacion = resultSet[8]
+        t.idUsuarioCreacion = resultSet[9]
+        t.idUsuarioDerivado = resultSet[10]
+        t.idCriticidad = resultSet[11]
+        t.idArea = resultSet[12]
+        t.idTipoTicket = resultSet[13]
         return t
     def fromTicket(tt):
         t = TicketEntity()
@@ -40,6 +42,7 @@ class TicketEntity:
         t.nombreCliente = tt.nombreCliente
         t.rutCliente = tt.rutCliente
         t.telefono = tt.telefono
+        t.correoElectronico = tt.correoElectronico
         t.detalle = tt.detalle
         t.observacion = tt.observacion
         t.idEstado = tt.idEstado

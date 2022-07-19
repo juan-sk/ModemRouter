@@ -39,6 +39,7 @@ class TicketRepository:
                     `nombre_cliente`,
                     `rut_cliente`,
                     `telefono`,
+                    `correo_electronico`,
                     `detalle`,
                     `observacion`,
                     `id_estado`,
@@ -62,6 +63,7 @@ class TicketRepository:
                 %s,
                 %s,
                 %s,
+                %s,
                 %s
                 );
 
@@ -70,6 +72,7 @@ class TicketRepository:
                 ticket.nombreCliente,
                 ticket.rutCliente,
                 ticket.telefono,
+                ticket.correoElectronico,
                 ticket.detalle,
                 ticket.observacion,
                 ticket.idEstado,
@@ -98,6 +101,7 @@ class TicketRepository:
                 `nombre_cliente` = %s,
                 `rut_cliente` = %s,
                 `telefono` =%s,
+                `correo_electronico`=%s,
                 `detalle` = %s,
                 `observacion` = %s,
                 `id_estado` = %s,
@@ -115,6 +119,7 @@ class TicketRepository:
                 ticket.nombreCliente,
                 ticket.rutCliente,
                 ticket.telefono,
+                ticket.correoElectronico,
                 ticket.detalle,
                 ticket.observacion,
                 ticket.idEstado,
@@ -140,6 +145,7 @@ class TicketRepository:
                         t.nombre_cliente,
                         t.rut_cliente,
                         t.telefono,
+                        t.correo_electronico,
                         t.detalle,
                         t.observacion,
                         t.id_estado,

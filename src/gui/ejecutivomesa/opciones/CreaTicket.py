@@ -16,10 +16,14 @@ class CreaTicket:
         ticket = self.formularioCreacionTicket(idUsuarioCreacion)
         print("se Ingresaron los datos del ticket de manera correcta")
         try:
+            input("presione Enter para Continuar con el Guardado del ticket")
             logging.info("se comienza guardado del ticket")
             
             self.ejecutivoMesaController.crearTicket(ticket)
             logging.info("se guardo correctamente el ticket")
+            print("El Ticket fue Guardado Correctamente")
+            input("presione Enter para Continuar con el Guardado del ticket")
+
         except Exception as error:
             msg = "ocurrio un error al intengar guardar el ticket"
             logging.error(msg)
@@ -34,6 +38,7 @@ class CreaTicket:
         ticket.nombreCliente = input("Ingrese Nombre Cliente: ")
         ticket.rutCliente = input("Ingrese Rut Cliente: ")
         ticket.telefono = input("Ingrese Telefono Cliente: ")
+        ticket.correoElectronico = input("ingrese el Correo Electronico del cliente: ")
         ticket.detalle = input("Ingrese Detalle para el Ticket: ")
         ticket.idEstado = 1
         ticket.idUsuarioCreacion = idUsuarioCreacion

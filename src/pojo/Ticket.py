@@ -8,6 +8,7 @@ class Ticket:
         self.nombreCliente = ""
         self.rutCliente = ""
         self.telefono = ""
+        self.correoElectronico = ""
         self.detalle = ""
         self.observacion =""
         self.idEstado=0
@@ -30,21 +31,22 @@ class Ticket:
         t.nombreCliente = rs[1]
         t.rutCliente = rs[2]
         t.telefono = rs[3]
-        t.detalle = rs[4]
-        t.observacion =rs[5]
-        t.idEstado=int(rs[6])
-        t.nomEstado=rs[7]
-        t.fechaCreacion  = rs[8]
-        t.idUsuarioCreacion = int(rs[9])
-        t.nombreUsuarioCreacion =rs[10]
-        t.idUsuarioDerivado = int(rs[11])
-        t.nombreUsuarioDerivado = rs[12]
-        t.idCriticidad= int(rs[13])
-        t.nomCriticidad = rs[14]
-        t.idArea = int(rs[15])
-        t.nomArea =rs[16]
-        t.idTipoTicket = int(rs[17])
-        t.nomTipoTicket = rs[18]
+        t.correoElectronico = rs[4]
+        t.detalle = rs[5]
+        t.observacion =rs[6]
+        t.idEstado=int(rs[7])
+        t.nomEstado=rs[8]
+        t.fechaCreacion  = rs[9]
+        t.idUsuarioCreacion = int(rs[10])
+        t.nombreUsuarioCreacion =rs[11]
+        t.idUsuarioDerivado = int(rs[12])
+        t.nombreUsuarioDerivado = rs[13]
+        t.idCriticidad= int(rs[14])
+        t.nomCriticidad = rs[15]
+        t.idArea = int(rs[16])
+        t.nomArea =rs[17]
+        t.idTipoTicket = int(rs[18])
+        t.nomTipoTicket = rs[19]
         return t
   
         
