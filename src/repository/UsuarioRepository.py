@@ -30,7 +30,7 @@ class UsuarioRepository:
     def obtenerUsuarioByUsuarioAndPass(self, user, password):
         try:
             logging.info("consultando usuario")
-            SQL = """SELECT * FROM tma.usuario where nombre_usuario =%s and password =%s"""
+            SQL = """SELECT * FROM tma.usuario where nombre_usuario =%s and password =%s and id_estado = 1"""
             cursor =  self._dbConn.cursor()
             data = (user,password)
             cursor.execute(SQL,data)
