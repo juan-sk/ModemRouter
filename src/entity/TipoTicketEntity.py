@@ -17,3 +17,13 @@ class TipoTicketEntity:
     
     def __str__(self):
         return "TipoTicketEntity(id:"+str(self.id)+ ", nomTipoTicket:"+str(self.nomTipoTicket)+", dscTipoTicket:"+str(self.dscTipoTicket)+")"
+    
+    def print(self):
+        m = """
+        Detalle del Tipo de Ticket
+        
+        Nombre Tipo Ticket:             %s
+        Descripcion del Tipo de Ticket: %s
+        
+        """%(self.nomTipoTicket,self.dscTipoTicket)
+        print(m)

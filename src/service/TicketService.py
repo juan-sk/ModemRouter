@@ -56,7 +56,20 @@ class TicketService:
             logging.error(error)
             return True
     def eliminarArea(self, idAreaEliminar):
-        return self.areaRepo.eliminarArea(idAreaEliminar)       
+        return self.areaRepo.eliminarArea(idAreaEliminar)   
+    
+    def guardarTipoTicket(self,tipoTicket):
+        return self.tipoTicketRepo.guardar(tipoTicket)
+    def modificarTipoTicket(self,tipoticket):
+        return self.tipoTicketRepo.modificar(tipoticket)
+    def eliminarTipoTicket(self,idTipoTicketEliminar):
+        return self.tipoTicketRepo.eliminar(idTipoTicketEliminar)
+    def tipoTicketElimnable(self, idTicket):
+        cantidadTicketsRelacionados = self.tipoTicketRepo.obtenerCantidadTicketsRelacionados(idTicket)
+        if cantidadTicketsRelacionados>0:
+            return False # hay tickets relacionados, por lo que no se puede elimianr para mantener consistencia (eliminable)
+        else:
+            return True # no hay tickets relacionados, por lo que se puede eliminar 
     @staticmethod
     def build():
         TicketService._ticketService = TicketService()

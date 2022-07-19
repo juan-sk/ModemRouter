@@ -65,6 +65,23 @@ class JefeDeMesaController:
         return self.ticketService.validarRelacionArea(idAreaAValidar)
     def eliminarArea(self,idAreaEliminar):
         return self.ticketService.eliminarArea(idAreaEliminar)
+    
+    
+    
+    def guardarTipoTicket(self,tipoTicket):
+        return self.ticketService.guardarTipoTicket(tipoTicket)
+    def  obtenerTiposTicket(self):
+        return self.ticketService.obtenerTiposTickets()
+    def modificarTipoTicket(self, tipoTicket):
+        return self.ticketService.modificarTipoTicket(tipoTicket)
+    def eliminarTipoTicket(self, idTipoTicketEliminar):
+        return self.ticketService.eliminarTipoTicket(idTipoTicketEliminar)
+    def tipoTicketEliminable(self, idTipoTicketElimnar):
+        return self.ticketService.tipoTicketElimnable(idTipoTicketElimnar)
+    def tipoTicketElimnable(self, idTipoTicketElimnar):
+        
+       return self.ticketService.tipoTicketElimnable(idTipoTicketElimnar)
+
     @staticmethod
     def build():
         JefeDeMesaController._jefeDeMesaController = JefeDeMesaController()
