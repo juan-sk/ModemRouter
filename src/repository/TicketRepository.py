@@ -186,7 +186,21 @@ class TicketRepository:
             logging.error("ocurrio un error al intentar obtener los tickets")
             logging.error(error)
             raise Exception
+    def obtenerTicketsRelacionados(self, idAreaRelacionado):
+        try:
+            SQL = "SELECT count(*) FROM tma.ticket where id_area =%s"
+            cursor =  self._dbConn.cursor()
+            val = (idAreaRelacionado,)
+            cursor.execute(SQL,val)
+
+            result= cursor.fetchall()
+            cursor.close()  
+            
+            return int(result[0][0])
+        except Exception as error:
+            logging.error("ocurrio un error al intentar obtener los tickets")
+            logging.error(error)
+            raise Exception
     @staticmethod
     def build():
         TicketRepository._ticketRepository = TicketRepository()    
-        

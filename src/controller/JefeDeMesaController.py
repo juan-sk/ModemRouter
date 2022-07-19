@@ -59,7 +59,12 @@ class JefeDeMesaController:
             logging.error("ocurrio un error obteniendo usuarios")
             logging.error(error)
             pass
-        
+    def obtenerAreas(self):
+        return self.ticketService.obtenerAreas()
+    def validarRelacionArea(self, idAreaAValidar):
+        return self.ticketService.validarRelacionArea(idAreaAValidar)
+    def eliminarArea(self,idAreaEliminar):
+        return self.ticketService.eliminarArea(idAreaEliminar)
     @staticmethod
     def build():
         JefeDeMesaController._jefeDeMesaController = JefeDeMesaController()

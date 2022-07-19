@@ -71,6 +71,22 @@ class AreaRepository:
             logging.error("ocurrio un error al intentar obtener las areas")
             logging.error(error)
             raise Exception
+    def eliminarArea(self,idAreaEliminar):
+        try:
+            SQL = "delete from area where id_area = %s"
+            VALUES = (idAreaEliminar,)
+            cursor =  self._dbConn.cursor()
+        
+            cursor.execute(SQL,VALUES)
+
+            result= cursor.fetchall()
+            self._dbConn.commit()
+            cursor.close()  
+            return result
+        except Exception as error:
+            logging.error("ocurrio un error al intentar eliminar el area")
+            logging.error(error)
+            raise Exception
     @staticmethod
     def build():
         AreaRepository._areaRepository = AreaRepository()

@@ -1,3 +1,4 @@
+import logging
 from re import I
 from pojo.Ticket import Ticket
 from repository.AreaRepository import AreaRepository
@@ -38,7 +39,24 @@ class TicketService:
     def obtenerEstadosTicket(self):
         return self.estadoTicket.obtenerEstadosTicket()
     def guardarArea(self,areaEntity):
-        return self.areaRepo.guardarArea(areaEntity)     
+        return self.areaRepo.guardarArea(areaEntity)   
+    def obtenerAreas(self):
+        return self.areaRepo.obtenerAreas()
+    
+    def validarRelacionArea(self, idAreaAValidar):
+        try:
+            
+            cantidad = self.ticketRepo.obtenerTicketsRelacionados(idAreaAValidar)
+            if cantidad <=0:
+                return True
+            else:
+                return False
+        except Exception as error:
+            logging.error("ocurio un error al validar las areas en la tabla de tickets, se retornara True")
+            logging.error(error)
+            return True
+    def eliminarArea(self, idAreaEliminar):
+        return self.areaRepo.eliminarArea(idAreaEliminar)       
     @staticmethod
     def build():
         TicketService._ticketService = TicketService()

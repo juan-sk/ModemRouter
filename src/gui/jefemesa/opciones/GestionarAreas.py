@@ -23,6 +23,7 @@ class GestionarAreas:
             elif opcion ==2:
                 self.modificarArea()
             elif opcion ==3:
+                self.eliminarAreas()
                 pass
             elif opcion ==4:
                 break
@@ -53,15 +54,39 @@ class GestionarAreas:
                     # salir del bucle 
                     break
        
-    
+    def mostrarAreas(self,areas):
+        HEADER = "|  ID  |       Nombre Area    |    Descripcion Area        |"
+        HEADER = GuiUtils.subrrayar(HEADER)
+        print(HEADER)
+        for item in areas:
+            print("| %3s  | %20s | %25s  |"%(item.id,item.nomArea,item.dscArea))
+             
     def modificarArea(self):
         
         pass
     
     def eliminarAreas(self):
-        pass
-    def mostrarAreas(self,areas):
-        pass
+        areas =   self.jefeDeMesaController.obtenerAreas()
+        
+        self.mostrarAreas(areas)
+        
+        opcionesValidas = []
+        for item in areas:
+            opcionesValidas.append(item.id)
+        opcionSalida = 0
+        opcionesValidas.append(opcionSalida)
+        print("Ingrese el id del Area a Eliminar (ingrese 0 para salir)")
+        idAreaEliminar =GuiInputUtils.inputNumber(opcionesValidas)
+        
+            
+            
+        eliminable = self.jefeDeMesaController.validarRelacionArea(idAreaEliminar)
+        if eliminable:
+            self.jefeDeMesaController.eliminarArea(idAreaEliminar)
+        else:
+            print("No se puede Eliminar el registro ya que cuenta tickets asignados")
+        input("Presione Enter para continuar")
+
     def menuOpciones(self):
         
         print(GuiUtils.subrrayar(" Opciones ")) 
