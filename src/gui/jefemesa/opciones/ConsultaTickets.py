@@ -1,5 +1,6 @@
 from datetime import datetime
 from controller.JefeDeMesaController import JefeDeMesaController
+from gui.OpcioensComunes import OpcionesComunes
 from utils.GuiInputUtils import GuiInputUtils
 from utils.GuiUtils import GuiUtils
 
@@ -17,27 +18,10 @@ class ConsultaTickets:
             opcion =self.opciones()
             GuiUtils.clearTerminal()
             if opcion ==1:
-                fecha = datetime.now()
-                while True:
-                    
-                    print("ingrese la fecha que desea buscar")
-                    print("ingrese el dia: ")
-                    dia = GuiInputUtils.inputNumberNoParams()
-                    print("ingrese el mes: ")
-                    mes= GuiInputUtils.inputNumberNoParams()
-                    print("ingrese el año: ")
-                    anno = GuiInputUtils.inputNumberNoParams()
-                    try:
-                        fecha = datetime(year=anno,month=mes, day=dia)
-                        break
-                    except Exception as error :
-                        print("la fecha ingresada no es correcta, intente nuevamente")
-                        pass
-                tickets  = self.jefeDeMesaController.buscarTicketsPorFechaCreacion(fecha)
-                self.mostrarTickets(tickets)
-                input("presione Enter para continuar")
+                self.conslutarPorFecha()
                 pass
             elif opcion == 2:
+                self.conslutaPorCriticidad()
                 pass
             elif opcion == 3:
                 pass
@@ -50,12 +34,63 @@ class ConsultaTickets:
             elif opcion == 7:
                 break
 
+    def conslutarPorFecha(self):
+        fecha = datetime.now()
+        while True:
+            print("ingrese la fecha que desea buscar")
+            print("ingrese el dia: ")
+            dia = GuiInputUtils.inputNumberNoParams()
+            print("ingrese el mes: ")
+            mes= GuiInputUtils.inputNumberNoParams()
+            print("ingrese el año: ")
+            anno = GuiInputUtils.inputNumberNoParams()
+            try:
+                fecha = datetime(year=anno,month=mes, day=dia)
+                break
+            except Exception as error :
+                print("la fecha ingresada no es correcta, intente nuevamente")
+                pass
+        tickets  = self.jefeDeMesaController.buscarTicketsPorFechaCreacion(fecha)
+        self.mostrarTickets(tickets)
+        OpcionesComunes.presioneEnterContinuar()
+
+    def conslutaPorCriticidad(self):
+        while True:
+            GuiUtils.clearTerminal()
+            print("Lista de Criticidades")
+            print()
+            criticidades=   self.jefeDeMesaController.obtenerCriticidades()
+            self.mostrarCriticidades(criticidades)
+      
+            opcionesValidas = []
+            for item in criticidades:
+                opcionesValidas.append(item.id)
+            opcionSalida = 0
+            opcionesValidas.append(opcionSalida)
+            print("Ingrese el id del Criticidad a que desea buscar (ingrese 0 para salir)")
+            idArea =GuiInputUtils.inputNumber(opcionesValidas)
+            if idArea ==0:
+                break
+            else:
+                GuiUtils.clearTerminal()
+                tickets =   self.jefeDeMesaController.buscarTicketsPorCriticidad(idArea)
+                self.mostrarTickets(tickets)
+                OpcionesComunes.presioneEnterContinuar()
+
+            
+            
+    def mostrarCriticidades(self,criticidades):
+        HEADER = "|  ID  |    Nombre Criticidad   |  Descripcion Criticidad   |"
+        print(HEADER)
+        
+        for item in criticidades:
+            print("| %3s  | %30s | %30s |"%(item.id, item.nomCriticidad, item.dscCriticidad))
     def mostrarTickets(slef, tickets):
-        HEADER =  "| ID  | Ejecutivo Creacion        |      Fecha Creacion       | Tipo Ticket   | Criticidad |     Area    |   Estado    | "
+        HEADER =  "| ID  | Ejecutivo Creacion        |      Fecha Creacion       |     Tipo Ticket      |      Criticidad     |     Area    |     Estado     | "
            
         print(HEADER)
         for item in tickets:
-            row ="| %3s | %25s | %25s | %20s | %15s  | %20s |  %10s"%(
+            row ="| %3s | %25s | %25s | %20s | %17s  | %13s |  %10s|"%(
                 item.idTicket,
                 item.nombreUsuarioCreacion,
                 item.fechaCreacion,

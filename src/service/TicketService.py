@@ -72,6 +72,10 @@ class TicketService:
             return True # no hay tickets relacionados, por lo que se puede eliminar
     def buscarTicketsPorFechaCreacion(self, fechaCreacion):
         return self.ticketRepo.buscarTicketsPorFechaCreacion(fechaCreacion);
+    
+    def buscarTicketsPorCriticidad(self,idCriticidad):
+        return self.ticketRepo.buscarTicketPorCriticidad(idCriticidad)
+    
     @staticmethod
     def build():
         TicketService._ticketService = TicketService()

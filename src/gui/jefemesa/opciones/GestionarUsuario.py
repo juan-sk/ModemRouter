@@ -2,6 +2,7 @@ import getpass
 import logging
 from controller.JefeDeMesaController import JefeDeMesaController
 from entity.UsuarioEntity import UsuarioEntity
+from gui.OpcioensComunes import OpcionesComunes
 from pojo.Usuario import Usuario
 from utils.GuiInputUtils import GuiInputUtils
 from utils.GuiUtils import GuiUtils
@@ -81,7 +82,7 @@ class GestionarUsuario:
             print("el usuario fue creado Correctamente")
         else:
             print("Ocurrio Un error Al Crear El Usuario")
-        input("presione Enter para continuar")
+        OpcionesComunes.presioneEnterContinuar()
             
     
     def formularioCreacionUsuario(self):

@@ -1,6 +1,7 @@
 import logging
 from entity.TipoTicketEntity import TipoTicketEntity
 from controller.JefeDeMesaController import JefeDeMesaController
+from gui.OpcioensComunes import OpcionesComunes
 from utils.GuiInputUtils import GuiInputUtils
 from utils.GuiUtils import GuiUtils
 
@@ -54,7 +55,7 @@ class GestionarTiposTicket:
             tipoT.nomTipoTicket = input("Ingrese El nombre del Tipo de Ticket: ")
             tipoT.dscTipoTicket = input("ingrese la descripcion del Tipo de Ticket: ")
             tipoT.print()
-            input("Presione Enter para continuar")
+            OpcionesComunes.presioneEnterContinuar()
             try:
                 print("Comienza el Guardado del tipo del ticket")
                 self.jefeDeMesaController.guardarTipoTicket(tipoT)
@@ -70,7 +71,7 @@ class GestionarTiposTicket:
                     continue
                 else:
                     break    
-        input("presione Enter para continuar")
+        OpcionesComunes.presioneEnterContinuar()
           
           
     def mostrarTipoTicket(self, tickets):
@@ -111,7 +112,7 @@ class GestionarTiposTicket:
             except Exception as error :
                 print("ocurrio un error al guardar la modificacion del tipo de ticket")
                 logging.error(error)
-            input("Presione Enter para continuar")
+            OpcionesComunes.presioneEnterContinuar()
         pass
     def eliminaTipoTicket(self):
         try:
@@ -127,7 +128,7 @@ class GestionarTiposTicket:
             eliminable = self.jefeDeMesaController.tipoTicketEliminable(idTipoTicketAEliminar)
             if eliminable:
                 
-                input("presione Enter para Continuar")
+                OpcionesComunes.presioneEnterContinuar()
                 print("Se inicia la eliminacion del tipo de ticket")
                 self.jefeDeMesaController.eliminarTipoTicket(idTipoTicketAEliminar)
                 print("Se elimino el tipo de ticket correctamente")
@@ -138,5 +139,5 @@ class GestionarTiposTicket:
             logging.error(error)
             print("ocurrrio un error al intentar Eliminar el Tipo de Ticket")
             
-        input("presione Enter para Continuar")
+        OpcionesComunes.presioneEnterContinuar()
        
