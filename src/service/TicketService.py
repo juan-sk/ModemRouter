@@ -75,6 +75,8 @@ class TicketService:
     
     def buscarTicketsPorCriticidad(self,idCriticidad):
         return self.ticketRepo.buscarTicketPorCriticidad(idCriticidad)
+    def buscarTicketPorTipoTicket(self,idTipoTicket):
+        return self.ticketRepo.buscarTicketPorTipoTicket(idTipoTicket)
     
     @staticmethod
     def build():

@@ -297,6 +297,54 @@ class TicketRepository:
             logging.error("ocurrio un error al intentar obtener los tickets")
             logging.error(error)
             raise Exception
+    def buscarTicketPorTipoTicket(self,idTipoTicket ):
+        try:
+            SQL = """ select
+                        t.id_ticket,
+                        t.nombre_cliente,
+                        t.rut_cliente,
+                        t.telefono,
+                        t.correo_electronico,
+                        t.detalle,
+                        t.observacion,
+                        t.id_estado,
+                        et.nom_estado_ticket,
+                        t.fecha_creacion,
+                        t.id_usuario_creacion,
+                        u1.nombre_usuario,
+                        t.id_usuario_derivado,
+                        u2.nombre_usuario,
+                        t.id_criticidad,
+                        c.nom_criticidad,
+                        t.id_area,
+                        a.nom_area,
+                        t.id_tipo_ticket,
+                        tt.nom_tipo_ticket
+                    from
+                        ticket as t
+                        join estado_ticket as et on t.id_estado = et.id_estado_ticket
+                        join usuario as u1 on t.id_usuario_creacion = u1.id_usuario
+                        join usuario as u2 on t.id_usuario_derivado = u2.id_usuario
+                        join criticidad as c on t.id_criticidad = c.id_criticidad
+                        join area as a on t.id_area = a.id_area
+                        join tipo_ticket as tt on t.id_tipo_ticket = tt.id_tipo_ticket
+                    where
+                        t.id_tipo_ticket    = %s"""
+            cursor =  self._dbConn.cursor()
+            val = (idTipoTicket,)
+            cursor.execute(SQL,val)
+            logging.info(cursor)
+            result= cursor.fetchall()
+            cursor.close()  
+            
+            res = []
+            for item in result:
+                res.append(Ticket.creaTicket(item))
+            return res
+        except Exception as error:
+            logging.error("ocurrio un error al intentar obtener los tickets")
+            logging.error(error)
+            raise Exception
     @staticmethod
     def build():
         TicketRepository._ticketRepository = TicketRepository()    

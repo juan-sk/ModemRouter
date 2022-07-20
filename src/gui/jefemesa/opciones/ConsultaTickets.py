@@ -24,6 +24,7 @@ class ConsultaTickets:
                 self.conslutaPorCriticidad()
                 pass
             elif opcion == 3:
+                self.consultarTipoTicket()
                 pass
             elif opcion == 4:
                 pass
@@ -77,7 +78,30 @@ class ConsultaTickets:
                 self.mostrarTickets(tickets)
                 OpcionesComunes.presioneEnterContinuar()
 
-            
+    def consultarTipoTicket(self):
+        while True:
+            GuiUtils.clearTerminal()
+            print("Lista de Tipos de Ticket")
+            print()
+            tiposTicket=   self.jefeDeMesaController.obtenerTiposTicket()
+            OpcionesComunes.mostrarTipoTicket(tiposTicket)
+      
+            opcionesValidas = []
+            for item in tiposTicket:
+                opcionesValidas.append(item.id)
+            opcionSalida = 0
+            opcionesValidas.append(opcionSalida)
+            print("Ingrese el id del Tipo de Ticket que desea buscar (ingrese 0 para salir)")
+            idTipoTicket =GuiInputUtils.inputNumber(opcionesValidas)
+            if idTipoTicket ==0:
+                break
+            else:
+                GuiUtils.clearTerminal()
+                tickets =   self.jefeDeMesaController.buscarTicketsPoTipoTicket(idTipoTicket)
+                self.mostrarTickets(tickets)
+                OpcionesComunes.presioneEnterContinuar()
+    
+          
             
     def mostrarCriticidades(self,criticidades):
         HEADER = "|  ID  |    Nombre Criticidad   |  Descripcion Criticidad   |"

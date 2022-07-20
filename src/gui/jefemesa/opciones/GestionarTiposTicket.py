@@ -74,12 +74,7 @@ class GestionarTiposTicket:
         OpcionesComunes.presioneEnterContinuar()
           
           
-    def mostrarTipoTicket(self, tickets):
-        HEADER = "|  ID  |   Nombre Tipo Ticket     |   Decripcion Tipo Ticket"
-        print(HEADER)
-        for item in tickets:
-            row = "|  %3s | %20s | %20s|"%(item.id,item.nomTipoTicket,item.dscTipoTicket)
-            print(row)
+
              
     def modificaTipoTicket(self):
         tiposTickets = self.jefeDeMesaController.obtenerTiposTicket()
