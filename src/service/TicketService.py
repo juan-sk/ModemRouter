@@ -69,7 +69,9 @@ class TicketService:
         if cantidadTicketsRelacionados>0:
             return False # hay tickets relacionados, por lo que no se puede elimianr para mantener consistencia (eliminable)
         else:
-            return True # no hay tickets relacionados, por lo que se puede eliminar 
+            return True # no hay tickets relacionados, por lo que se puede eliminar
+    def buscarTicketsPorFechaCreacion(self, fechaCreacion):
+        return self.ticketRepo.buscarTicketsPorFechaCreacion(fechaCreacion);
     @staticmethod
     def build():
         TicketService._ticketService = TicketService()

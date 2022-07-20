@@ -81,7 +81,8 @@ class JefeDeMesaController:
     def tipoTicketElimnable(self, idTipoTicketElimnar):
         
        return self.ticketService.tipoTicketElimnable(idTipoTicketElimnar)
-
+    def buscarTicketsPorFechaCreacion(self, fechaCreacion):
+        return self.ticketService.buscarTicketsPorFechaCreacion(fechaCreacion)
     @staticmethod
     def build():
         JefeDeMesaController._jefeDeMesaController = JefeDeMesaController()
