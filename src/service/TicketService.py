@@ -1,6 +1,4 @@
 import logging
-from re import I
-from pojo.Ticket import Ticket
 from repository.AreaRepository import AreaRepository
 from repository.CriticidadRepository import CriticidadRepository
 from repository.EstadoTicketRepository import EstadoTicketRepository
@@ -77,6 +75,9 @@ class TicketService:
         return self.ticketRepo.buscarTicketPorCriticidad(idCriticidad)
     def buscarTicketPorTipoTicket(self,idTipoTicket):
         return self.ticketRepo.buscarTicketPorTipoTicket(idTipoTicket)
+    
+    def buscarTicketsPorUsuarioCreacion(self, idUsuario):
+        return self.ticketRepo.buscarTicketsPorUsuarioCreacion(idUsuario)
     
     @staticmethod
     def build():

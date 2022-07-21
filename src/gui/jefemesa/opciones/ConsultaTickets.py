@@ -27,6 +27,7 @@ class ConsultaTickets:
                 self.consultarTipoTicket()
                 pass
             elif opcion == 4:
+                self.consultarEjecutivoCreacion()
                 pass
             elif opcion == 5:
                 pass
@@ -101,7 +102,28 @@ class ConsultaTickets:
                 self.mostrarTickets(tickets)
                 OpcionesComunes.presioneEnterContinuar()
     
-          
+    def consultarEjecutivoCreacion(self):
+        while True:
+            GuiUtils.clearTerminal()
+            print("Lista de Ejcutivos")
+            print()
+            ejecutivos=   self.jefeDeMesaController.obtenerEjecutivosMesa()
+            OpcionesComunes.mostarUsuarios(ejecutivos)
+      
+            opcionesValidas = []
+            for item in ejecutivos:
+                opcionesValidas.append(item.id)
+            opcionSalida = 0
+            opcionesValidas.append(opcionSalida)
+            print("Ingrese el id del Usuario que desea buscar (ingrese 0 para salir)")
+            idUsuario =GuiInputUtils.inputNumber(opcionesValidas)
+            if idUsuario ==0:
+                break
+            else:
+                GuiUtils.clearTerminal()
+                tickets =   self.jefeDeMesaController.buscarTicketsPorUsuarioCreacion(idUsuario)
+                self.mostrarTickets(tickets)
+                OpcionesComunes.presioneEnterContinuar()   
             
     def mostrarCriticidades(self,criticidades):
         HEADER = "|  ID  |    Nombre Criticidad   |  Descripcion Criticidad   |"
@@ -130,8 +152,8 @@ class ConsultaTickets:
         print("1). Filtrar Por Fecha Especifica")
         print("2). Filtrar Por Criticidad")
         print("3). Filtrar Por Tipo Ticket")
-        print("4). Filtrar Por Ejecutivo que abre el Ticket")
-        print("5). Filtrar Por Ejecutivo que cierra el Ticket")
+        print("4). Filtrar Por Ejecutivo que Abre el Ticket")
+        print("5). Filtrar Por Ejecutivo que Cierra el Ticket")
         print("6). Filtrar Por Area ")
         print("7). Atras ")
         

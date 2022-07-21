@@ -65,5 +65,19 @@ class Usuario:
         else:
             u.dscEstado = "Desactivo"
         return u
+    
+    @staticmethod
+    def creaUsuario(rs):
+        u = Usuario()
+        u.id =int(rs[0])
+        u.nombreUsuario=rs[1]
+        u.password = rs[2]
+        u.idEstado=int(rs[3])
+        u.dscEstado = rs[4]
+        u.idTipoUsuario=int(rs[5])
+        u.dscTipoUsuario=rs[6]
+        u.idArea = int(rs[7])
+        u.dscArea = rs[8]
+        return u
              
         

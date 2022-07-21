@@ -143,12 +143,7 @@ class GestionarUsuario:
   
     def desactivarUsuario(self):
         usuarios = self.jefeDeMesaController.obtenerUsuarios();
-        HEADER = "|  ID  |        Nombre        |  Estado   |          Tipo Usuario          |              Area              |"
-
-        print(HEADER)
-        for us in usuarios:
-            us.println()
-        
+        OpcionesComunes.mostarUsuarios(usuarios)
         id = int(input("Ingrese el ID del registro a DESACTIVAR: "))
         
         desactivado = self.jefeDeMesaController.desactivarUusario(id)
@@ -156,4 +151,6 @@ class GestionarUsuario:
             print("el usuario se desactivo correctamente")
         else:
             print("el usuario no se desactivo correctamente")
+
+
         

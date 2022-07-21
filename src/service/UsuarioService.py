@@ -96,7 +96,8 @@ class UsuarioService:
         except Exception as error:
             logging.error("ocurrio un error al obtener los usuarios por id area")
             pass
-
+    def obtenerEjecutivosMesa(self):
+        return self.usuarioRepo.obtenerEjecutivosMesa()
     @staticmethod
     def build():
         UsuarioService._usuarioService = UsuarioService()
