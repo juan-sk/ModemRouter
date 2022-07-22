@@ -97,6 +97,10 @@ class JefeDeMesaController:
     
     def buscarTicketsPorUsuarioCreacion(self,idUsuario):
         return self.ticketService.buscarTicketsPorUsuarioCreacion(idUsuario)
+    def buscarTicketsPorUsuarioCierre(self,idUsuario):
+        return self.ticketService.buscarTicketsPorUsuarioCierre(idUsuario)
+    def buscarTicketsPorArea(self,idArea):
+        return self.ticketService.buscarTicketsPorArea(idArea)
     @staticmethod
     def build():
         JefeDeMesaController._jefeDeMesaController = JefeDeMesaController()

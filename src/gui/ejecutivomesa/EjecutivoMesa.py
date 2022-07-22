@@ -18,13 +18,13 @@ class EjecutivoMesa:
             opcion = self.menuOpciones()
             
             if opcion == 1:
-                print("ver Tickets")
+                #print("ver Tickets")
                 VerTickets().start()
             elif opcion ==2:
-                print("Crear tiket")
+                #print("Crear tiket")
                 CreaTicket().start(idUsuario)
             elif opcion == 3:
-                print("salir")
+                #print("salir")
                 return True
 
     def menuOpciones(self):
@@ -36,7 +36,7 @@ class EjecutivoMesa:
                 print("")
   
                 
-                print(GuiUtils.subrrayar("Opciones"))
+                print(GuiUtils.subrrayar("Opciones: "))
                 print("1). Ver tickets")
                 print("2). Crear Ticket")
                 print("3). Cerrar Secion")

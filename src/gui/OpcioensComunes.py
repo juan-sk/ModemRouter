@@ -11,11 +11,11 @@ class OpcionesComunes:
     
     @staticmethod
     def mostarUsuarios( usuarios):
-        HEADER = "|  ID  |        Nombre         |  Estado |     Tipo Usuario    |     Area     |"
+        HEADER = "|  ID  |        Nombre         |  Estado |     Tipo Usuario    |"
 
         print(HEADER)
         for us in usuarios:
-            print("| %3s  |  %20s | %s | %13s |   %20s"%(us.id,us.nombreUsuario,us.dscEstado,us.dscTipoUsuario,us.dscArea))
+            print("| %3s  |  %20s | %s | %13s |"%(us.id,us.nombreUsuario,us.dscEstado,us.dscTipoUsuario))
     @staticmethod
     def presioneEnterContinuar():
         input("Presione Enter para Continuar")
