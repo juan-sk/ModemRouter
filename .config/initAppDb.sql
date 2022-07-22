@@ -142,11 +142,31 @@ INSERT INTO
         id_tipo_usuario
     )
 VALUES
-    ("root", "toor", 1, 1),
-    ("aliagapato", "root", 1, 2),
-    ("sandrocksusana", "root", 1, 2),
-    ("sandrockjuan", "root", 1, 3),
-    ("arriagadavanessa", "root", 1, 3);
+    ("jefe", "jefe", 1, 1),
+    ("mesa1", "mesa1", 1, 2),
+    ("mesa2", "mesa2", 1, 2),
+    ("spec1", "spec1", 1, 3),
+    ("spec2", "spec2", 1, 3);
+
+DROP TABLE IF EXISTS `area_usuario`;
+
+create table area_usuario(
+    id_usuario int,
+    id_area int
+);
+
+INSERT INTO
+    area_usuario (
+        id_usuario,
+        id_area
+    )
+VALUES
+    (4, 1),
+    (5, 1),
+    (4, 2),
+    (5, 3),
+    (4, 4),
+    (5, 4);
 
 -- Tablas relacionadas a tickets
 -- tipo_ticket
@@ -192,6 +212,11 @@ create table estado_ticket(
     dsc_estado_ticket varchar(250)
 );
 
+INSERT INTO estado_ticket(nom_estado_ticket, dsc_estado_ticket)
+VALUES 
+    ('Abierto', 'Ticket en trabajo'),
+    ('Cerrado', 'Ticket finalizado');
+
 DROP TABLE IF EXISTS `ticket`;
 
 create table ticket(
@@ -210,6 +235,67 @@ create table ticket(
     id_tipo_ticket int,
     correo_electronico varchar(250)
 );
+
+INSERT INTO ticket (
+  nombre_cliente,
+  rut_cliente,
+  telefono,
+  detalle,
+  observacion,
+  id_estado,
+  fecha_creacion,
+  id_usuario_creacion,
+  id_usuario_derivado,
+  id_criticidad,
+  id_area,
+  id_tipo_ticket,
+  correo_electronico
+) VALUES 
+  (
+    'Coca Cola',
+    '11222333-4',
+    '987654321',
+    'Se descompuso la maquina del estadio nacional',
+    '',
+    1,
+    current_timestamp,
+    1,
+    4,
+    1,
+    1,
+    1,
+    'contacto@cocacola.cl'
+  ),
+  (
+    'Inacap',
+    '99888777-6',
+    '987654321',
+    'El ascensor de la sede de Iquique no funciona',
+    'Tecnico en camnino',
+    1,
+    current_timestamp,
+    1,
+    4,
+    1,
+    2,
+    1,
+    'contacto@inacap.cl'
+  ),
+  (
+    'Google',
+    '66555444-1',
+    '987654321',
+    'Base de datos no responde',
+    'Se reinicio el server donde se encuentra la base de datos pero luego del reinicio aun no responde el servicio',
+    1,
+    current_timestamp,
+    1,
+    4,
+    1,
+    4,
+    1,
+    'contacto@google.com'
+  );
 
 -- Relaciones de la tabla usuario
 -- usuario => usuario_tipo_usuario_fk => tipo_usuario.id_tipo_usuario

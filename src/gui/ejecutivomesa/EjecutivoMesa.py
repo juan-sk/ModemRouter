@@ -1,6 +1,7 @@
 import logging
 from gui.ejecutivomesa.opciones.CreaTicket import CreaTicket
 from gui.ejecutivomesa.opciones.VerTickets import VerTickets
+from entity.TicketEntity import TicketEntity
 from utils.GuiUtils import GuiUtils
 
 
@@ -8,12 +9,13 @@ class EjecutivoMesa:
     
     def __init__(self):
        self.creaTicket = CreaTicket()
+       self.VerTickets = VerTickets()
     
     
      
     def start(self,idUsuario):
         while True:
-            opcion =    self.menuOpciones()
+            opcion = self.menuOpciones()
             
             if opcion == 1:
                 print("ver Tickets")
@@ -34,12 +36,12 @@ class EjecutivoMesa:
                 print("")
   
                 
-                print(GuiUtils.subrrayar("Opcions"))
+                print(GuiUtils.subrrayar("Opciones"))
                 print("1). Ver tickets")
                 print("2). Crear Ticket")
                 print("3). Cerrar Secion")
                 opcionesValidas  = [1,2,3]
-                value = int(input("Ingrese Opcion:"))
+                value = int(input("ingrese Opcion: "))
                 if value in opcionesValidas:
                     # opcionMenu = value 
                     return value 

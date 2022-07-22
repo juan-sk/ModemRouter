@@ -28,6 +28,8 @@ class EjecutivoMesaController:
         return self.ticketService.obtenerTiposTickets()
     def obtenerUsuarios(self, idArea):
         return self.usuarioService.obtenerUsuarioPorArea(idArea)
+    def obtenerTickets(self):
+        return self.ticketService.obtenerTickets()
     
     @staticmethod
     def build():

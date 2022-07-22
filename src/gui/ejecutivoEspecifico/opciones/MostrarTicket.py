@@ -44,7 +44,7 @@ class MostrarTicket:
                     opcionesTicket.append(item.id)
                     print("%d). %s"%(item.id,item.nomEstadoTicket))
                     
-                opcion = input("Ingrese Opcion:")
+                opcion = input("ingrese Opcion: ")
                 opcionInt = int(opcion)
                 if opcionInt in opcionesTicket:
                     return item.id
@@ -81,8 +81,8 @@ class MostrarTicket:
             t.nombreUsuarioDerivado,
             t.nomCriticidad,
             t.nomArea,
-            t.nomEstado,
             t.nomTipoTicket,
+            t.nomEstado,
             t.nombreCliente,
             t.rutCliente ,
             t.telefono,

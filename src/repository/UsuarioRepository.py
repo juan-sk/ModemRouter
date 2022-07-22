@@ -89,7 +89,7 @@ class UsuarioRepository:
                 usuario = UsuarioEntity.creaUsuarioEntity(result[0])
                 return usuario
             else:
-                raise Exception("no se encontro el usuario")
+                logging.error("no se encontro el usuario")
         except Exception as error:
             logging.error("ocurrio un error al intentar obtener los usuarios")
             logging.error(error)
@@ -103,10 +103,12 @@ class UsuarioRepository:
                 `nombre_usuario`,
                 `password`,
                 `id_estado`,
-                `id_tipo_usuario`
+                `id_tipo_usuario`,
+                `id_area`
             )
         VALUES
             (
+                %s,
                 %s,
                 %s,
                 %s,
@@ -120,7 +122,8 @@ class UsuarioRepository:
             usuario.nombreUsuario,
             usuario.password,
             usuario.idEstado,
-            usuario.idTipoUsuario
+            usuario.idTipoUsuario,
+            usuario.id_area
         )
         cursor.execute(SQL, val)
         

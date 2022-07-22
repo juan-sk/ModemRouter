@@ -47,7 +47,7 @@ class GestionarUsuario:
                 print ("3). Desactiva Usuario")
                 print ("4). Atras")
                 print ("")
-                value = int(input("Ingrese Opcion:"))
+                value = int(input("ingrese Opcion: "))
                 if value in opcionesValidas:
                     # opcionMenu = value 
                     return value 

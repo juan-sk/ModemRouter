@@ -34,10 +34,12 @@ class ComponentConfig:
         TipoTicketRepository.build()
         TipoUsuarioRepository.build()
         UsuarioRepository.build()
+   
     @staticmethod
     def createServices():
         TicketService.build()
         UsuarioService.build()
+    
     @staticmethod
     def createControllers():
         EjecutivoEspecificoController.build()
