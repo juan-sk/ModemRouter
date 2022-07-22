@@ -103,12 +103,10 @@ class UsuarioRepository:
                 `nombre_usuario`,
                 `password`,
                 `id_estado`,
-                `id_tipo_usuario`,
-                `id_area`
+                `id_tipo_usuario`
             )
         VALUES
             (
-                %s,
                 %s,
                 %s,
                 %s,
@@ -122,8 +120,7 @@ class UsuarioRepository:
             usuario.nombreUsuario,
             usuario.password,
             usuario.idEstado,
-            usuario.idTipoUsuario,
-            usuario.id_area
+            usuario.idTipoUsuario
         )
         cursor.execute(SQL, val)
         
