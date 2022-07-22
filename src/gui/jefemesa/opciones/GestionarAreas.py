@@ -31,17 +31,18 @@ class GestionarAreas:
     
     def crearArea(self):
         while True:
-            print(" Crear Area ")
+            GuiUtils.clearTerminal()
+            print(GuiUtils.subrrayar("Crear Area"))
             area = AreaEntity()
-            area.nomArea= input("Ingrese Nombre Area: ")
-            area.dscArea = input("Ingrese descripcion del Area: ")
+            area.nomArea= input("Nombre: ")
+            area.dscArea = input("Descripcion: ")
             area.print()
-            input("Presione Enter para continuar Con el Guardado del Area")
+            print()
+            input("Resumen de los datos ingresados, presione una tecla para continuar...")
             # guardar area 
             try:
                 self.jefeDeMesaController.guardarArea(area)
-                print("Se guardo Correctamente el area")
-                input("Presione Enter para Continuar ")
+                print("Area creada, presione una tecla para continuar ")
                 break
             except Exception as error :
                 logging.error("ocurrion un error guardando el area")
@@ -49,12 +50,11 @@ class GestionarAreas:
                 print("ocurrio un error en el guardado del Area")
                 print("Desea intentar nuevamente? (SI/NO)")
                 respuesta = GuiInputUtils.inputSiNo()
-                if respuesta ==1:
+                if respuesta == 1:
                     continue
                 else:
                     # salir del bucle 
                     break
-       
              
     def modificarArea(self):
         
@@ -84,12 +84,12 @@ class GestionarAreas:
 
     def menuOpciones(self):
         
-        print(GuiUtils.subrrayar(" Opciones ")) 
-        print("")            
+        print(GuiUtils.subrrayar("Gestionar area")) 
+        print()            
         print("1). Crear Area")            
         print("2). Modificar Areas")            
         print("3). Eliminar Area")            
         print("4). Atras")            
-        print("")            
+        print()            
         opcionsValidas = [1,2,3,4]
         return GuiInputUtils.inputNumber(opcionsValidas)

@@ -31,24 +31,17 @@ class Application:
     logger.info("informacion")
     while True:
       self.mainEventLoop()
-      value = value+1
-      if(value >=10):
+      value = value + 1
+      if(value >= 10):
         break   
     self.stop()
     
-    
   def mainEventLoop(self):
     Gui().gui()
-         
-        
-        
-        
+
   def stop(self):
     DbConnection.close()
     logging.info("########### [FIN DE LA APLICACION] ###############")
-    
-            
-            
   
 def main():
     App = Application()
@@ -59,7 +52,5 @@ def main():
         print(error)
         App.stop()  
   
-
-
 if __name__ == "__main__":
     main()

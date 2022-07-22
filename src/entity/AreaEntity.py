@@ -1,3 +1,6 @@
+from utils.GuiUtils import GuiUtils
+
+
 class AreaEntity:
     
     def __init__(self) :
@@ -19,10 +22,10 @@ class AreaEntity:
         return "AreaEntity(id:"+str(self.id)+ ", nomArea:"+str(self.nomArea)+", dscArea:"+str(self.dscArea)+")"
     
     def print(self):
+        GuiUtils.clearTerminal()
         a = """
         Detalle Area 
-        
-        Nombre Area     :%s
-        Descripcion Area:%s
+        Nombre Area      : %s
+        Descripcion Area : %s
         """%(self.nomArea,self.dscArea)
         print(a)

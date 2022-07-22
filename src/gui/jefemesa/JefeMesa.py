@@ -12,7 +12,7 @@ class JefeMesa:
         self.gestionarUsuario =GestionarUsuario() 
         self.gestionarAreas = GestionarAreas()
         self.gestionarTiposTicket = GestionarTiposTicket()
-        self.conslutaTickets = ConsultaTickets()
+        self.consultaTickets = ConsultaTickets()
     
     def start(self):
         while True:
@@ -26,14 +26,15 @@ class JefeMesa:
             elif opcion ==3:
                 self.gestionarTiposTicket.start()
             elif opcion ==4:
-                self.conslutaTickets.start()
+                self.consultaTickets.start()
                 pass    
             elif opcion ==5:
                 break
         
     def menuOpcionesJefeMesa(self):
         GuiUtils.clearTerminal()
-        print( GuiUtils.subrrayar( "Opcions jefeesa"))
+        print(GuiUtils.subrrayar( "Opciones jefe mesa"))
+        print()
         print("1). Gestionar Usuarios")
         print("2). Gestionar Areas")
         print("3). Gestionar Tipos Ticket")
