@@ -2,6 +2,7 @@ import getpass
 import logging
 from controller.JefeDeMesaController import JefeDeMesaController
 from entity.UsuarioEntity import UsuarioEntity
+from gui.OpcioensComunes import OpcionesComunes
 from pojo.Usuario import Usuario
 from utils.GuiInputUtils import GuiInputUtils
 from utils.GuiUtils import GuiUtils
@@ -81,7 +82,7 @@ class GestionarUsuario:
             print("el usuario fue creado Correctamente")
         else:
             print("Ocurrio Un error Al Crear El Usuario")
-        input("presione Enter para continuar")
+        OpcionesComunes.presioneEnterContinuar()
             
     
     def formularioCreacionUsuario(self):
@@ -142,12 +143,7 @@ class GestionarUsuario:
   
     def desactivarUsuario(self):
         usuarios = self.jefeDeMesaController.obtenerUsuarios();
-        HEADER = "|  ID  |        Nombre        |  Estado   |          Tipo Usuario          |              Area              |"
-
-        print(HEADER)
-        for us in usuarios:
-            us.println()
-        
+        OpcionesComunes.mostarUsuarios(usuarios)
         id = int(input("Ingrese el ID del registro a DESACTIVAR: "))
         
         desactivado = self.jefeDeMesaController.desactivarUusario(id)
@@ -155,4 +151,6 @@ class GestionarUsuario:
             print("el usuario se desactivo correctamente")
         else:
             print("el usuario no se desactivo correctamente")
+
+
         

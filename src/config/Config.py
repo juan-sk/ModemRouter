@@ -14,7 +14,7 @@ class Config:
         Env.configs()
         
         print("configurando Log")
-        LogConfig.configurar();
+        LogConfig.configurar()
         # conectar db
         logging.info("configurando db")
         Config._dbConnection = DbConnection.conectarDB()

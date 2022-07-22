@@ -1,6 +1,7 @@
 import logging
 from controller.JefeDeMesaController import JefeDeMesaController
 from entity.AreaEntity import AreaEntity
+from gui.OpcioensComunes import OpcionesComunes
 from utils.GuiInputUtils import GuiInputUtils
 from utils.GuiUtils import GuiUtils
 
@@ -54,12 +55,6 @@ class GestionarAreas:
                     # salir del bucle 
                     break
        
-    def mostrarAreas(self,areas):
-        HEADER = "|  ID  |       Nombre Area    |    Descripcion Area        |"
-        HEADER = GuiUtils.subrrayar(HEADER)
-        print(HEADER)
-        for item in areas:
-            print("| %3s  | %20s | %25s  |"%(item.id,item.nomArea,item.dscArea))
              
     def modificarArea(self):
         
@@ -85,7 +80,7 @@ class GestionarAreas:
             self.jefeDeMesaController.eliminarArea(idAreaEliminar)
         else:
             print("No se puede Eliminar el registro ya que cuenta tickets asignados")
-        input("Presione Enter para continuar")
+        OpcionesComunes.presioneEnterContinuar()
 
     def menuOpciones(self):
         

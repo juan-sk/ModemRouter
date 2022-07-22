@@ -1,6 +1,7 @@
 import logging
 from config.Config import Config
 from entity.UsuarioEntity import UsuarioEntity
+from pojo.Usuario import Usuario
 
 
 class UsuarioRepository:
@@ -21,6 +22,50 @@ class UsuarioRepository:
             res = []
             for item in result:
                 res.append(UsuarioEntity.creaUsuarioEntity(item))
+            return res
+        except Exception as error:
+            logging.error("ocurrio un error al intentar obtener los usuarios")
+            logging.error(error)
+            raise Exception
+        
+    def obtenerEjecutivosMesa(self):
+        try:
+            SQL = """
+            select
+                u.id_usuario,
+                u.nombre_usuario,
+                u.password, 
+                u.id_estado, 
+                eu.nom_estado,
+                u.id_tipo_usuario,
+                tu.nom_tipo_usuario,
+                ar.id_area,
+                ar.nom_area
+            from
+                usuario as u
+                join tipo_usuario as tu on u.id_tipo_usuario = tu.id_tipo_usuario
+                join estado_usuario as eu on u.id_estado = eu.id_estado
+                join (
+                    select
+                        a.id_area,
+                        au.id_usuario,
+                        a.nom_area
+                    from
+                        area_usuario as au
+                        join area as a on au.id_area = a.id_area
+                ) as ar on u.id_usuario = ar.id_usuario
+                    where u.id_tipo_usuario=2
+            """
+            cursor =  self._dbConn.cursor()
+        
+            cursor.execute(SQL)
+
+            result= cursor.fetchall()
+            cursor.close()  
+            
+            res = []
+            for item in result:
+                res.append(Usuario.creaUsuario(item))
             return res
         except Exception as error:
             logging.error("ocurrio un error al intentar obtener los usuarios")
@@ -129,6 +174,49 @@ class UsuarioRepository:
             logging.error("ocurrio un error al intentar obtener los usuarios")
             logging.error(error)
             raise Exception
+    def obtenerUsuario(self):
+        try:
+            SQL ="""
+            select
+                u.id_usuario,
+                u.nombre_usuario,
+                u.password,
+                u.id_estado,
+                u.id_tipo_usuario,
+                tu.nom_tipo_usuario,
+                eu.nom_estado,
+                ar.id_area,
+                ar.nom_area
+            from
+                usuario as u
+                join tipo_usuario as tu on u.id_tipo_usuario = tu.id_tipo_usuario
+                join estado_usuario as eu on u.id_estado = eu.id_estado
+                join (
+                    select
+                        a.id_area,
+                        au.id_usuario,
+                        a.nom_area
+                    from
+                        area_usuario as au
+                        join area as a on au.id_area = a.id_area
+                ) as ar on u.id_usuario = ar.id_usuario
+            """
+            cursor =  self._dbConn.cursor()
+        
+            cursor.execute(SQL)
+
+            result= cursor.fetchall()
+            cursor.close()  
+            
+            res = []
+            for item in result:
+                res.append(Usuario.creaUsuarioEntity(item))
+            return res
+        except Exception as error:
+            logging.error("ocurrio un error al intentar obtener los usuarios")
+            logging.error(error)
+            raise Exception
+        
     @staticmethod
     def build():
         UsuarioRepository._usuarioRepository = UsuarioRepository()    

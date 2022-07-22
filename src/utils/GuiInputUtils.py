@@ -21,6 +21,18 @@ class GuiInputUtils:
                 logging.error(error)
                 print("ocurrio un error con el valor ingresado, Intente nuevamente ")
     @staticmethod
+    def inputNumberNoParams():
+        while True:
+            try:              
+                # opcionesValidas  = [1,2,3]
+                value = int(input("Ingrese Opcion:"))
+                return value 
+               
+            except Exception as error:
+                logging.error("ocurio un error con el input ingresado")
+                logging.error(error)
+                print("ocurrio un error con el valor ingresado, Intente nuevamente ")
+    @staticmethod
     def inputString(opcionesValidas):
         while True:
             try:              

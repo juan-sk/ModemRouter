@@ -29,5 +29,7 @@ class UsuarioEntity:
         u.idEstado = usuario.idEstado
         u.idTipoUsuario = usuario.idTipoUsuario
         return u
+    
+
     def __str__(self):
         return "UsuarioEntity(id:"+str(self.id)+ ", nombreUsuario:"+str(self.nombreUsuario)+", password:"+str(self.password)+", idEstado:"+str(self.idEstado)+", idTipoUsuario:"+str(self.idTipoUsuario)+")"

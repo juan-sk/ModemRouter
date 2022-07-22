@@ -65,6 +65,38 @@ class JefeDeMesaController:
         return self.ticketService.validarRelacionArea(idAreaAValidar)
     def eliminarArea(self,idAreaEliminar):
         return self.ticketService.eliminarArea(idAreaEliminar)
+    
+    
+    
+    def guardarTipoTicket(self,tipoTicket):
+        return self.ticketService.guardarTipoTicket(tipoTicket)
+    def  obtenerTiposTicket(self):
+        return self.ticketService.obtenerTiposTickets()
+    def modificarTipoTicket(self, tipoTicket):
+        return self.ticketService.modificarTipoTicket(tipoTicket)
+    def eliminarTipoTicket(self, idTipoTicketEliminar):
+        return self.ticketService.eliminarTipoTicket(idTipoTicketEliminar)
+    def tipoTicketEliminable(self, idTipoTicketElimnar):
+        return self.ticketService.tipoTicketElimnable(idTipoTicketElimnar)
+    def tipoTicketElimnable(self, idTipoTicketElimnar):
+        
+       return self.ticketService.tipoTicketElimnable(idTipoTicketElimnar)
+    def buscarTicketsPorFechaCreacion(self, fechaCreacion):
+        return self.ticketService.buscarTicketsPorFechaCreacion(fechaCreacion)
+
+    def obtenerCriticidades(self):
+        return self.ticketService.obtenerCriticidades()
+    def buscarTicketsPorCriticidad(self,idCriticidad):
+        return self.ticketService.buscarTicketsPorCriticidad(idCriticidad)
+    def buscarTicketsPoTipoTicket(self,idTipoTicket):
+        
+        return self.ticketService.buscarTicketPorTipoTicket(idTipoTicket) 
+    
+    def obtenerEjecutivosMesa(self):
+        return self.usuarioService.obtenerEjecutivosMesa()
+    
+    def buscarTicketsPorUsuarioCreacion(self,idUsuario):
+        return self.ticketService.buscarTicketsPorUsuarioCreacion(idUsuario)
     @staticmethod
     def build():
         JefeDeMesaController._jefeDeMesaController = JefeDeMesaController()
