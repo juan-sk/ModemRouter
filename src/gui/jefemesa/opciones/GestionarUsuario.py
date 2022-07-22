@@ -19,16 +19,16 @@ class GestionarUsuario:
         opcionMenu = self.menuOpciones()
         if opcionMenu == 1:
             # ir a crear usuario
-            print ("ir crear usuario")
+            # print ("ir crear usuario")
             self.crearUsuario()
-        elif opcionMenu == 2:
+        # elif opcionMenu == 2:
             #  ir a modificar usuario
-            print ("ir modificar usuario")
-        elif opcionMenu == 3:
+            # print ("ir modificar usuario")
+        elif opcionMenu == 2:
             
-            print ("ir a desactivar usuario")
+            # print ("ir a desactivar usuario")
             self.desactivarUsuario()
-        elif opcionMenu ==4:
+        elif opcionMenu == 3:
             pass             
         return
     
@@ -40,12 +40,12 @@ class GestionarUsuario:
                 print("     Gestion de usuario         ")
 
                 print (GuiUtils.subrrayar(" Opciones "))
-                opcionesValidas  = [1,2,3,4]
+                opcionesValidas  = [1,2,3]
                 print("")
                 print ("1). Crea Usuario")
-                print ("2). Modifica Usuario")
-                print ("3). Desactiva Usuario")
-                print ("4). Atras")
+                #print ("2). Modifica Usuario")
+                print ("2). Desactiva Usuario")
+                print ("3). Atras")
                 print ("")
                 value = int(input("ingrese Opcion: "))
                 if value in opcionesValidas:

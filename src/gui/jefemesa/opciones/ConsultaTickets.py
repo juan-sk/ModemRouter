@@ -1,3 +1,4 @@
+from cgi import print_arguments
 from datetime import datetime
 from controller.JefeDeMesaController import JefeDeMesaController
 from gui.OpcioensComunes import OpcionesComunes
@@ -30,9 +31,10 @@ class ConsultaTickets:
                 self.consultarEjecutivoCreacion()
                 pass
             elif opcion == 5:
+                self.consultarEjecutivoCierre()
                 pass
             elif opcion == 6:
-                pass
+                self.consultarPorArea()
             elif opcion == 7:
                 break
 
@@ -101,14 +103,14 @@ class ConsultaTickets:
                 tickets =   self.jefeDeMesaController.buscarTicketsPoTipoTicket(idTipoTicket)
                 self.mostrarTickets(tickets)
                 OpcionesComunes.presioneEnterContinuar()
-    
+
     def consultarEjecutivoCreacion(self):
         while True:
             GuiUtils.clearTerminal()
             print("Lista de Ejcutivos")
             print()
-            ejecutivos=   self.jefeDeMesaController.obtenerEjecutivosMesa()
-            OpcionesComunes.mostarUsuarios(ejecutivos)
+            ejecutivos =  self.jefeDeMesaController.obtenerUsuarios()
+            self.mostarUsuarios(ejecutivos)
       
             opcionesValidas = []
             for item in ejecutivos:
@@ -122,16 +124,84 @@ class ConsultaTickets:
             else:
                 GuiUtils.clearTerminal()
                 tickets =   self.jefeDeMesaController.buscarTicketsPorUsuarioCreacion(idUsuario)
-                self.mostrarTickets(tickets)
+                if len(tickets) > 0:
+                    self.mostrarTickets(tickets)
+                else:
+                    print("Sin tickets abiertos por el usuario")
+                OpcionesComunes.presioneEnterContinuar()
+    
+    def consultarEjecutivoCierre(self):
+        while True:
+            GuiUtils.clearTerminal()
+            print("Lista de Ejcutivos")
+            print()
+            ejecutivos =  self.jefeDeMesaController.obtenerUsuarios()
+            self.mostarUsuarios(ejecutivos)
+      
+            opcionesValidas = []
+            for item in ejecutivos:
+                opcionesValidas.append(item.id)
+            opcionSalida = 0
+            opcionesValidas.append(opcionSalida)
+            print("Ingrese el id del Usuario que desea buscar (ingrese 0 para salir)")
+            idUsuario =GuiInputUtils.inputNumber(opcionesValidas)
+            if idUsuario ==0:
+                break
+            else:
+                GuiUtils.clearTerminal()
+                tickets =   self.jefeDeMesaController.buscarTicketsPorUsuarioCierre(idUsuario)
+                if len(tickets) > 0:
+                    self.mostrarTickets(tickets)
+                else:
+                    print("Sin tickets cerrados por el usuario")
                 OpcionesComunes.presioneEnterContinuar()   
-            
+    
+    def consultarPorArea(self):
+        while True:
+            GuiUtils.clearTerminal()
+            print("Listado de areas")
+            print()
+            areas =  self.jefeDeMesaController.obtenerAreas()
+            self.mostrarAreas(areas)
+      
+            opcionesValidas = []
+            for item in areas:
+                opcionesValidas.append(item.id)
+            opcionSalida = 0
+            opcionesValidas.append(opcionSalida)
+            print("Ingrese el id del area que desea buscar (ingrese 0 para salir)")
+            idArea =GuiInputUtils.inputNumber(opcionesValidas)
+            if idArea ==0:
+                break
+            else:
+                GuiUtils.clearTerminal()
+                tickets =   self.jefeDeMesaController.buscarTicketsPorArea(idArea)
+                if len(tickets) > 0:
+                    self.mostrarTickets(tickets)
+                else:
+                    print("Sin tickets asignados al area")
+                OpcionesComunes.presioneEnterContinuar()   
+    
+    def mostarUsuarios(self,ejecutivos):
+        HEADER = "| ID  | Usuario"
+        print(HEADER)        
+        for item in ejecutivos:
+            print("| %s   | %s"%(item.id, item.nombreUsuario))
     def mostrarCriticidades(self,criticidades):
-        HEADER = "|  ID  |    Nombre Criticidad   |  Descripcion Criticidad   |"
+        HEADER = "|  ID |    Nombre Criticidad   |  Descripcion Criticidad   |"
         print(HEADER)
         
         for item in criticidades:
             print("| %3s  | %30s | %30s |"%(item.id, item.nomCriticidad, item.dscCriticidad))
-    def mostrarTickets(slef, tickets):
+    
+    def mostrarAreas(self,areas):
+        HEADER = "|  ID |    Nombre |  Descripcion|"
+        print(HEADER)
+        
+        for item in areas:
+            print("| %3s  | %30s | %30s |"%(item.id, item.nomArea, item.dscArea))
+    
+    def mostrarTickets(self, tickets):
         HEADER =  "| ID  | Ejecutivo Creacion        |      Fecha Creacion       |     Tipo Ticket      |      Criticidad     |     Area    |     Estado     | "
            
         print(HEADER)
@@ -141,8 +211,8 @@ class ConsultaTickets:
                 item.nombreUsuarioCreacion,
                 item.fechaCreacion,
                 item.nomTipoTicket,
-                item.nomArea,
                 item.nomCriticidad,
+                item.nomArea,
                 item.nomEstado
                 )
             print(row)

@@ -251,51 +251,14 @@ INSERT INTO ticket (
   id_tipo_ticket,
   correo_electronico
 ) VALUES 
-  (
-    'Coca Cola',
-    '11222333-4',
-    '987654321',
-    'Se descompuso la maquina del estadio nacional',
-    '',
-    1,
-    current_timestamp,
-    1,
-    4,
-    1,
-    1,
-    1,
-    'contacto@cocacola.cl'
-  ),
-  (
-    'Inacap',
-    '99888777-6',
-    '987654321',
-    'El ascensor de la sede de Iquique no funciona',
-    'Tecnico en camnino',
-    1,
-    current_timestamp,
-    1,
-    4,
-    1,
-    2,
-    1,
-    'contacto@inacap.cl'
-  ),
-  (
-    'Google',
-    '66555444-1',
-    '987654321',
-    'Base de datos no responde',
-    'Se reinicio el server donde se encuentra la base de datos pero luego del reinicio aun no responde el servicio',
-    1,
-    current_timestamp,
-    1,
-    4,
-    1,
-    4,
-    1,
-    'contacto@google.com'
-  );
+  ('Coca Cola', '11222333-4', '987654321', 'Se quiere feliciar a S.Sandrock por su excelente disposición',  '',  1,  current_timestamp,  2,  4,  3,  4,  1, 'contacto@cocacola.cl'),
+  ('Coca Cola', '11222333-4', '987654321', 'Actor equivocado en el spot de marzo 2022',  '',  1,  current_timestamp,  3,  5,  3,  1,  3, 'contacto@cocacola.cl'),
+  ('Coca Cola', '11222333-4', '987654321', 'Maquina de mall plaza tobalaba sin funcionar',  '',  1,  current_timestamp,  2,  4,  3,  2,  2, 'contacto@cocacola.cl'),
+  ('Coca Cola', '11222333-4', '987654321', 'Maquina de mall del centro sin funcionar',  '',  1,  current_timestamp,  3,  5,  3,  2,  2, 'contacto@cocacola.cl'),
+  ('Pepsi', '99888777-2', '9752371253', 'Se quiere feliciar a J.Sandrock por su excelente disposición',  '',  1,  current_timestamp,  2,  4,  3,  4,  1, 'contacto@pepsi.cl'),
+  ('Pepsi', '99888777-2', '9752371253', 'Despacho de prodcutos no entregado en sucursal correcta',  '',  1,  current_timestamp,  3,  5,  3,  1,  3, 'contacto@pepsi.cl'),
+  ('Pepsi', '99888777-2', '9752371253', 'Maquina gasificadora de la fuente alemana no funciona',  '',  1,  current_timestamp,  2,  4,  3,  2,  2, 'contacto@pepsi.cl'),
+  ('Pepsi', '99888777-2', '9752371253', 'Mantención de maquinas del estadio nacional',  '',  1,  current_timestamp,  3,  5,  3,  2,  2, 'contacto@pepsi.cl');
 
 -- Relaciones de la tabla usuario
 -- usuario => usuario_tipo_usuario_fk => tipo_usuario.id_tipo_usuario

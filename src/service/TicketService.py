@@ -77,6 +77,10 @@ class TicketService:
         return self.ticketRepo.buscarTicketPorTipoTicket(idTipoTicket)
     def buscarTicketsPorUsuarioCreacion(self, idUsuario):
         return self.ticketRepo.buscarTicketsPorUsuarioCreacion(idUsuario)
+    def buscarTicketsPorUsuarioCierre(self, idUsuario):
+        return self.ticketRepo.buscarTicketsPorUsuarioCierre(idUsuario)
+    def buscarTicketsPorArea(self, idArea):
+        return self.ticketRepo.buscarTicketsPorArea(idArea)
     def obtenerTickets(self):
         return self.ticketRepo.obtenerTickets()
     
