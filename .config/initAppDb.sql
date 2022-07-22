@@ -33,7 +33,11 @@ VALUES
         "Media",
         "La operación del sistema se ve impacatada"
     ),
-    (3, "Alta", "El sistema no puede operar");
+    (
+        3, 
+        "Alta", 
+        "El sistema no puede operar"
+    );
 
 DROP TABLE IF EXISTS `area`;
 
