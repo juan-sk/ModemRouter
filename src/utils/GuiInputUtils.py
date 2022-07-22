@@ -5,13 +5,12 @@ from operator import ne
 
 class GuiInputUtils:
     
-    
     @staticmethod
     def inputNumber(opcionesValidas):
         while True:
             try:              
                 # opcionesValidas  = [1,2,3]
-                value = int(input("Ingrese Opcion:"))
+                value = int(input("ingrese Opcion: "))
                 if value in opcionesValidas:
                     return value 
                 else: 
@@ -25,7 +24,7 @@ class GuiInputUtils:
         while True:
             try:              
                 # opcionesValidas  = [1,2,3]
-                value = int(input("Ingrese Opcion:"))
+                value = int(input("ingrese Opcion: "))
                 return value 
                
             except Exception as error:
@@ -37,7 +36,7 @@ class GuiInputUtils:
         while True:
             try:              
                 # opcionesValidas  = [1,2,3]
-                value = input("Ingrese Opcion:")
+                value = input("ingrese Opcion: ")
                 if value in opcionesValidas:
                     return value 
                 else: 

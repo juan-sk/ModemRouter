@@ -62,7 +62,7 @@ class CreaTicket:
                 opcionesValidas.append(item.id)
                 
                 print("%d). %s"%(item.id,item.nomCriticidad))
-            opcion = input(" Ingrese la Opcion") 
+            opcion = input("Ingrese una Opcion: ") 
             opcionInt = 0
             try:
                 opcionInt = int(opcion)

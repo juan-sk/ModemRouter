@@ -38,7 +38,7 @@ class EjecutivoEspecifico:
                 print ("2). Cerrar Sesion")
 
                 print ("")
-                value = int(input("Ingrese Opcion:"))
+                value = int(input("ingrese Opcion: "))
                 if value in opcionesValidas:
                     # opcionMenu = value 
                     return value 
