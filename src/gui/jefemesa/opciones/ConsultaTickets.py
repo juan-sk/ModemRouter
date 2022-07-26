@@ -13,12 +13,12 @@ class ConsultaTickets:
         pass
     
     def start(self):
-        GuiUtils.clearTerminal()
+        
         while True:
-            GuiUtils.clearTerminal()
-            opcion =self.opciones()
-            GuiUtils.clearTerminal()
-            if opcion ==1:
+            
+            opcion = self.opciones()
+
+            if opcion == 1:
                 self.conslutarPorFecha()
                 pass
             elif opcion == 2:
@@ -35,35 +35,31 @@ class ConsultaTickets:
                 pass
             elif opcion == 6:
                 self.consultarPorArea()
-            elif opcion == 7:
+            elif opcion == 0:
                 break
 
     def conslutarPorFecha(self):
         fecha = datetime.now()
         while True:
-            print("ingrese la fecha que desea buscar")
-            print("ingrese el dia: ")
-            dia = GuiInputUtils.inputNumberNoParams()
-            print("ingrese el mes: ")
-            mes= GuiInputUtils.inputNumberNoParams()
-            print("ingrese el año: ")
-            anno = GuiInputUtils.inputNumberNoParams()
+            GuiUtils.clearTerminal()
+            GuiUtils.titulo("Ejecutivo mesa de ayuda")
+            GuiUtils.subtitulo(" Busqueda de tickets según fecha especifica")
+            day = int(input(" Día: "))
+            month = int(input(" Mes: "))
+            year = int(input(" Año: "))
             try:
-                fecha = datetime(year=anno,month=mes, day=dia)
+                fecha = datetime(year = year, month = month, day = day)
                 break
-            except Exception as error :
-                print("la fecha ingresada no es correcta, intente nuevamente")
+            except Exception as error:
+                GuiUtils.clearTerminal()
+                GuiUtils.tituloEspaciado("la fecha ingresada no es correcta, intente nuevamente")
                 pass
-        tickets  = self.jefeDeMesaController.buscarTicketsPorFechaCreacion(fecha)
+        tickets = self.jefeDeMesaController.buscarTicketsPorFechaCreacion(fecha)
         self.mostrarTickets(tickets)
-        OpcionesComunes.presioneEnterContinuar()
 
     def conslutaPorCriticidad(self):
         while True:
-            GuiUtils.clearTerminal()
-            print("Lista de Criticidades")
-            print()
-            criticidades=   self.jefeDeMesaController.obtenerCriticidades()
+            criticidades = self.jefeDeMesaController.obtenerCriticidades()
             self.mostrarCriticidades(criticidades)
       
             opcionesValidas = []
@@ -71,22 +67,17 @@ class ConsultaTickets:
                 opcionesValidas.append(item.id)
             opcionSalida = 0
             opcionesValidas.append(opcionSalida)
-            print("Ingrese el id del Criticidad a que desea buscar (ingrese 0 para salir)")
-            idArea =GuiInputUtils.inputNumber(opcionesValidas)
-            if idArea ==0:
+            text = "Ingrese el id del Criticidad a que desea buscar (ingrese 0 volver atras): "
+            idCriticidad =GuiInputUtils.inputTextCustom(opcionesValidas, text)
+            if idCriticidad == 0:
                 break
             else:
-                GuiUtils.clearTerminal()
-                tickets =   self.jefeDeMesaController.buscarTicketsPorCriticidad(idArea)
+                tickets = self.jefeDeMesaController.buscarTicketsPorCriticidad(idCriticidad)
                 self.mostrarTickets(tickets)
-                OpcionesComunes.presioneEnterContinuar()
 
     def consultarTipoTicket(self):
         while True:
-            GuiUtils.clearTerminal()
-            print("Lista de Tipos de Ticket")
-            print()
-            tiposTicket=   self.jefeDeMesaController.obtenerTiposTicket()
+            tiposTicket = self.jefeDeMesaController.obtenerTiposTicket()
             OpcionesComunes.mostrarTipoTicket(tiposTicket)
       
             opcionesValidas = []
@@ -94,21 +85,16 @@ class ConsultaTickets:
                 opcionesValidas.append(item.id)
             opcionSalida = 0
             opcionesValidas.append(opcionSalida)
-            print("Ingrese el id del Tipo de Ticket que desea buscar (ingrese 0 para salir)")
-            idTipoTicket =GuiInputUtils.inputNumber(opcionesValidas)
+            text = " Ingrese el id del Tipo de Ticket que desea buscar (ingrese 0 volver atras): "
+            idTipoTicket =GuiInputUtils.inputTextCustom(opcionesValidas, text)
             if idTipoTicket ==0:
                 break
             else:
-                GuiUtils.clearTerminal()
                 tickets =   self.jefeDeMesaController.buscarTicketsPoTipoTicket(idTipoTicket)
                 self.mostrarTickets(tickets)
-                OpcionesComunes.presioneEnterContinuar()
 
     def consultarEjecutivoCreacion(self):
         while True:
-            GuiUtils.clearTerminal()
-            print("Lista de Ejcutivos")
-            print()
             ejecutivos =  self.jefeDeMesaController.obtenerUsuarios()
             self.mostarUsuarios(ejecutivos)
       
@@ -117,24 +103,16 @@ class ConsultaTickets:
                 opcionesValidas.append(item.id)
             opcionSalida = 0
             opcionesValidas.append(opcionSalida)
-            print("Ingrese el id del Usuario que desea buscar (ingrese 0 para salir)")
-            idUsuario =GuiInputUtils.inputNumber(opcionesValidas)
+            text = " Ingrese el id del usuario que desea buscar (ingrese 0 volver atras): "
+            idUsuario =GuiInputUtils.inputTextCustom(opcionesValidas, text)
             if idUsuario ==0:
                 break
             else:
-                GuiUtils.clearTerminal()
                 tickets =   self.jefeDeMesaController.buscarTicketsPorUsuarioCreacion(idUsuario)
-                if len(tickets) > 0:
-                    self.mostrarTickets(tickets)
-                else:
-                    print("Sin tickets abiertos por el usuario")
-                OpcionesComunes.presioneEnterContinuar()
+                self.mostrarTickets(tickets)
     
     def consultarEjecutivoCierre(self):
         while True:
-            GuiUtils.clearTerminal()
-            print("Lista de Ejcutivos")
-            print()
             ejecutivos =  self.jefeDeMesaController.obtenerUsuarios()
             self.mostarUsuarios(ejecutivos)
       
@@ -143,24 +121,16 @@ class ConsultaTickets:
                 opcionesValidas.append(item.id)
             opcionSalida = 0
             opcionesValidas.append(opcionSalida)
-            print("Ingrese el id del Usuario que desea buscar (ingrese 0 para salir)")
-            idUsuario =GuiInputUtils.inputNumber(opcionesValidas)
-            if idUsuario ==0:
+            text = "Ingrese el id del usuario que desea buscar (ingrese 0 volver atras): "
+            idUsuario =GuiInputUtils.inputTextCustom(opcionesValidas, text)
+            if idUsuario == 0:
                 break
             else:
-                GuiUtils.clearTerminal()
                 tickets =   self.jefeDeMesaController.buscarTicketsPorUsuarioCierre(idUsuario)
-                if len(tickets) > 0:
-                    self.mostrarTickets(tickets)
-                else:
-                    print("Sin tickets cerrados por el usuario")
-                OpcionesComunes.presioneEnterContinuar()   
-    
+                self.mostrarTickets(tickets)
+                
     def consultarPorArea(self):
         while True:
-            GuiUtils.clearTerminal()
-            print("Listado de areas")
-            print()
             areas =  self.jefeDeMesaController.obtenerAreas()
             self.mostrarAreas(areas)
       
@@ -169,65 +139,103 @@ class ConsultaTickets:
                 opcionesValidas.append(item.id)
             opcionSalida = 0
             opcionesValidas.append(opcionSalida)
-            print("Ingrese el id del area que desea buscar (ingrese 0 para salir)")
-            idArea =GuiInputUtils.inputNumber(opcionesValidas)
-            if idArea ==0:
+            text = " Ingrese el N° del area por el que desae buscar (ingrese 0 volver atras): "
+            idArea = GuiInputUtils.inputTextCustom(opcionesValidas, text)
+            if idArea == 0:
                 break
             else:
-                GuiUtils.clearTerminal()
                 tickets =   self.jefeDeMesaController.buscarTicketsPorArea(idArea)
-                if len(tickets) > 0:
-                    self.mostrarTickets(tickets)
-                else:
-                    print("Sin tickets asignados al area")
-                OpcionesComunes.presioneEnterContinuar()   
+                self.mostrarTickets(tickets)
     
     def mostarUsuarios(self,ejecutivos):
-        HEADER = "| ID  | Usuario"
-        print(HEADER)        
+        GuiUtils.clearTerminal()
+        GuiUtils.titulo("Jefe de mesa de ayuda")
+        GuiUtils.subtitulo(" Listado de usuarios existentes")
+        header = "|" + GuiUtils.customText(2, 9, " ", "ID")
+        header += "|" + GuiUtils.customText(2, 88, " ", "Nombre de usuario") + "|"
+        print(header)
+        GuiUtils.separador()
         for item in ejecutivos:
-            print("| %s   | %s"%(item.id, item.nombreUsuario))
-    def mostrarCriticidades(self,criticidades):
-        HEADER = "|  ID |    Nombre Criticidad   |  Descripcion Criticidad   |"
-        print(HEADER)
-        
+            #print("| %3s  | %30s | %30s |"%(item.id, item.nomArea, item.dscArea))
+            data = "|" + GuiUtils.customText(2, 9, " ", item.id)
+            data += "|" + GuiUtils.customText(2, 88, " ", item.nombreUsuario) + "|"
+            print(data)
+            GuiUtils.separador()  
+
+    def mostrarCriticidades(self, criticidades):
+        GuiUtils.clearTerminal()
+        GuiUtils.titulo("Jefe de mesa de ayuda")
+        GuiUtils.subtitulo(" Listado de criticidades existentes")
+        header = "|" + GuiUtils.customText(2, 9, " ", "ID")
+        header += "|" + GuiUtils.customText(2, 88, " ", "Nombre") + "|"
+        print(header)
+        GuiUtils.separador()
         for item in criticidades:
-            print("| %3s  | %30s | %30s |"%(item.id, item.nomCriticidad, item.dscCriticidad))
-    
+            #print("| %3s  | %30s | %30s |"%(item.id, item.nomArea, item.dscArea))
+            data = "|" + GuiUtils.customText(2, 9, " ", item.id)
+            data += "|" + GuiUtils.customText(2, 88, " ", item.nomCriticidad) + "|"
+            print(data)
+            GuiUtils.separador()  
+
     def mostrarAreas(self,areas):
-        HEADER = "|  ID |    Nombre |  Descripcion|"
-        print(HEADER)
-        
+        GuiUtils.clearTerminal()
+        GuiUtils.titulo("Jefe de mesa de ayuda")
+        GuiUtils.subtitulo(" Listado de áreas existentes")
+        header = "|" + GuiUtils.customText(2, 9, " ", "ID")
+        header += "|" + GuiUtils.customText(2, 88, " ", "Nombre") + "|"
+        print(header)
+        GuiUtils.separador()
         for item in areas:
-            print("| %3s  | %30s | %30s |"%(item.id, item.nomArea, item.dscArea))
+            #print("| %3s  | %30s | %30s |"%(item.id, item.nomArea, item.dscArea))
+            data = "|" + GuiUtils.customText(2, 9, " ", item.id)
+            data += "|" + GuiUtils.customText(2, 88, " ", item.nomArea) + "|"
+            print(data)
+            GuiUtils.separador()  
     
     def mostrarTickets(self, tickets):
-        HEADER =  "| ID  | Ejecutivo Creacion        |      Fecha Creacion       |     Tipo Ticket      |      Criticidad     |     Area    |     Estado     | "
-           
-        print(HEADER)
-        for item in tickets:
-            row ="| %3s | %25s | %25s | %20s | %17s  | %13s |  %10s|"%(
-                item.idTicket,
-                item.nombreUsuarioCreacion,
-                item.fechaCreacion,
-                item.nomTipoTicket,
-                item.nomCriticidad,
-                item.nomArea,
-                item.nomEstado
-                )
-            print(row)
+        if(len(tickets) > 0):
+            GuiUtils.clearTerminal()
+            GuiUtils.titulo("Jefe de mesa de ayuda")
+            GuiUtils.subtitulo(" Listado de tickets")
+            header = "|" + GuiUtils.customText(2, 5, " ", "ID")
+            header += "|" + GuiUtils.customText(2, 21, " ", "Fecha creación")
+            header += "|" + GuiUtils.customText(2, 15, " ", "Tipo ticket")
+            header += "|" + GuiUtils.customText(2, 12, " ", "Criticidad")
+            header += "|" + GuiUtils.customText(2, 27, " ", "Area")
+            header += "|" + GuiUtils.customText(2, 13, " ", "Estado") + "|"
+            print(header)
+            GuiUtils.separador()
+            for item in tickets:
+                data = "|" + GuiUtils.customText(2, 5, " ", item.idTicket)
+                data += "|" + GuiUtils.customText(2, 21, " ", item.fechaCreacion)
+                data += "|" + GuiUtils.customText(2, 15, " ", item.nomTipoTicket)
+                data += "|" + GuiUtils.customText(2, 12, " ", item.nomCriticidad)
+                data += "|" + GuiUtils.customText(2, 27, " ", item.nomArea)
+                data += "|" + GuiUtils.customText(2, 13, " ", item.nomEstado) + "|"
+                #print("| %3s  | %30s | %30s |"%(item.id, item.nomArea, item.dscArea))
+                #data = "|" + GuiUtils.customText(2, 9, " ", item.id)
+                #data += "|" + GuiUtils.customText(2, 88, " ", item.nomArea) + "|"
+                print(data)
+            GuiUtils.separador()
+        else:
+            GuiUtils.clearTerminal()
+            GuiUtils.tituloEspaciado("No se han encontrado resultados")
+        input(" Presione cualquier tecla continuar...")
+        
     def opciones(self):
-        print(GuiUtils.subrrayar("   Opciones  "))
-        print()
-        print("1). Filtrar Por Fecha Especifica")
-        print("2). Filtrar Por Criticidad")
-        print("3). Filtrar Por Tipo Ticket")
-        print("4). Filtrar Por Ejecutivo que Abre el Ticket")
-        print("5). Filtrar Por Ejecutivo que Cierra el Ticket")
-        print("6). Filtrar Por Area ")
-        print("7). Atras ")
-        
-        
-        opcionesValidas = [1,2,3,4,5,6,7]
-        opcion = GuiInputUtils.inputNumber(opcionesValidas)
-        return opcion
+
+        GuiUtils.clearTerminal()
+        GuiUtils.titulo("Jefe de mesa de ayuda")
+        GuiUtils.subtitulo("Menu de opciones para consulta de tickets")
+        GuiUtils.izq("1) Filtrar Por Fecha Especifica")
+        GuiUtils.izq("2) Filtrar Por Criticidad")
+        GuiUtils.izq("3) Filtrar Por Tipo Ticket")
+        GuiUtils.izq("4) Filtrar Por Ejecutivo que Abre el Ticket")
+        GuiUtils.izq("5) Filtrar Por Ejecutivo que Cierra el Ticket")
+        GuiUtils.izq("6) Filtrar Por Area ")
+        GuiUtils.izq("0) Volver ")
+        GuiUtils.separador()
+        opcionesValidas = [0,1,2,3,4,5,6]
+        value = int(input(" Ingrese un n° de opción para continuar: "))
+        if value in opcionesValidas:
+            return value

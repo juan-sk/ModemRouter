@@ -87,6 +87,24 @@ class AreaRepository:
             logging.error("ocurrio un error al intentar eliminar el area")
             logging.error(error)
             raise Exception
+    def modificarArea(self,area):
+        try:
+            SQL = "update area set nom_area = %s, dsc_area = %s where id_area = %s"
+            VALUES = (area.nomArea, area.dscArea, area.id,)
+            cursor =  self._dbConn.cursor()
+        
+            cursor.execute(SQL,VALUES)
+
+            result= cursor.fetchall()
+            self._dbConn.commit()
+            cursor.close()  
+            return result
+        except Exception as error:
+            logging.error("ocurrio un error al intentar modificar el area")
+            logging.error(error)
+            raise Exception
+
+    
     @staticmethod
     def build():
         AreaRepository._areaRepository = AreaRepository()

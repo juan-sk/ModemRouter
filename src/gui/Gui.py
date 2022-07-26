@@ -15,8 +15,7 @@ class Gui:
 
     def mensajeBienvenida(self):
         GuiUtils.clearTerminal()
-        print(GuiUtils.subrrayar("Software TMA"))
-        print()
+        GuiUtils.titulo("Software TMA")
 
     def gui(self):
         self.mensajeBienvenida()

@@ -84,6 +84,8 @@ class TicketService:
     def obtenerTickets(self):
         return self.ticketRepo.obtenerTickets()
     
+    def modificarArea(self, area):
+        return self.areaRepo.modificarArea(area)
     @staticmethod
     def build():
         TicketService._ticketService = TicketService()

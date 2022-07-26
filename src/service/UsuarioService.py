@@ -81,10 +81,9 @@ class UsuarioService:
         return us
     
     
-    def desactivarUsuario(self, idUsuario):
+    def desactivarUsuario(self, usuario):
         try:
-            
-            return  self.usuarioRepo.desactivarUsuario(idUsuario)
+            return  self.usuarioRepo.desactivarUsuario(usuario)
         except Exception as error:
             logging.error("ocurrio un error desactivando al usuario")
             logging.error(error)
@@ -98,6 +97,11 @@ class UsuarioService:
             pass
     def obtenerEjecutivosMesa(self):
         return self.usuarioRepo.obtenerEjecutivosMesa()
+    def nombreUsuarioDisponible(self, nombreUsuario):
+        return self.usuarioRepo.nombreUsuarioDisponible(nombreUsuario)
+
+    def modificarUsuario(self, usuario):
+        return self.usuarioRepo.modificarUsuario(usuario)
     @staticmethod
     def build():
         UsuarioService._usuarioService = UsuarioService()

@@ -13,14 +13,11 @@ class LoginGui:
         self.usuarioController  = LoginController()
     
     def login(self):
-        print(GuiUtils.subrrayar("Iniciar sesión: Por Favor Ingrese sus Credenciales"))
-
-        usuario = input("Usuario: ")
-        password =  getpass.getpass()
+        GuiUtils.subtitulo("Inicio de sesión: ingrese su usuario y contraseña")
+        usuario = input(" Usuario: ")
+        password =  getpass.getpass(" Contraseña: ")
         us = self.usuarioController.login(usuario,password)
         if(us):
-            # GuiUtils.clearTerminal()
-            # print("Bienvenido %s"% us.nombreUsuario)
             return us
         else:
             logging.error("Credenciales Incorrectas... intente nuevamente") 

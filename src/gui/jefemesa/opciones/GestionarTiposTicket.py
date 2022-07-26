@@ -16,47 +16,49 @@ class GestionarTiposTicket:
     def start(self):
         
         while True:
-              
-            GuiUtils.clearTerminal()
+            
             
             opcion = self.menuOpciones()
+                         
             if opcion == 1:
                 self.creaTipoTicket()
-            #elif opcion ==2:
-            #    self.modificaTipoTicket()
             elif opcion == 2:
+                self.modificaTipoTicket()
+            elif opcion == 3:
                 self.eliminaTipoTicket()
                 pass
-            elif opcion == 3:
+            elif opcion == 0:
                 break
         
         
     def menuOpciones(self):
-  
-        print(GuiUtils.subrrayar("Opciones: ")) 
-        print("")            
-        print("1). Crear Tipo Ticket")            
-        #print("2). Modificar Tipo Ticket")            
-        print("2). Eliminar Tipo Ticket")            
-        print("3). Atras")            
-        print("")            
-        opcionsValidas = [1,2,3]
-        return GuiInputUtils.inputNumber(opcionsValidas)
-    
+        GuiUtils.clearTerminal()
+        GuiUtils.titulo("Jefe de mesa de ayuda")
+        GuiUtils.subtitulo("Menu de opciones para tipos de ticket ")
+        GuiUtils.izq("1) Crear tipo de ticket")
+        GuiUtils.izq("2) Modificar tipo de ticket")
+        GuiUtils.izq("3) Eliminar tipo de ticket")
+        GuiUtils.izq("0) Volver")
+        GuiUtils.separador()
+        opcionesValidas = [0,1,2,3]
+        value = int(input(" Ingrese un n° de opción para continuar: "))
+        if value in opcionesValidas:
+            return value
     
     def creaTipoTicket(self):
         while True:
             GuiUtils.clearTerminal()
-            print(GuiUtils.subrrayar("Crear tipo ticket"))
+            GuiUtils.titulo("Jefe de mesa de ayuda")
+            GuiUtils.subtitulo(" Creación de tipo de ticket")
+            GuiUtils.subtitulo(" Por favor ingrese el detalle requerido: ")
             tipoT = TipoTicketEntity()
-            tipoT.nomTipoTicket = input("Ingrese El nombre del Tipo de Ticket: ")
-            tipoT.dscTipoTicket = input("ingrese la descripcion del Tipo de Ticket: ")
-            tipoT.print()
-            OpcionesComunes.presioneEnterContinuar()
+            tipoT.nomTipoTicket = input(" Nombre: ")
+            tipoT.dscTipoTicket = input(" Descripción: ")
             try:
-                print("Comienza el Guardado del tipo del ticket")
                 self.jefeDeMesaController.guardarTipoTicket(tipoT)
-                print("Se Termino el guardao del ticket")
+                GuiUtils.clearTerminal()
+                GuiUtils.tituloEspaciado("Tipo de ticket creado correctamente")
+                input(" Presione cualquier tecla continuar...")
                 break
             except Exception as error:
                 logging.error("ocurrio un error el el guardado del tipo de ticket")
@@ -67,45 +69,40 @@ class GestionarTiposTicket:
                 if respuesta == 1:
                     continue
                 else:
-                    break    
-        OpcionesComunes.presioneEnterContinuar()
-          
-          
+                    break       
 
-             
+     
     def modificaTipoTicket(self):
-        tiposTickets = self.jefeDeMesaController.obtenerTiposTicket()
-        self.mostrarTipoTicket(tiposTickets)
-        
-        opcionesValidas = []
-        for item in tiposTickets:
-            opcionesValidas.append(item.id)
-        opcionesValidas.append(0)
-        print("ingrese el id del registro a modificar (ingrese 0 para salir)")
-        idTipoTicketAModificar =GuiInputUtils.inputNumber(opcionesValidas)
-        if(idTipoTicketAModificar == 0):
-            return 
-        else:
-            try:
-                
+        while True:
+            tiposTickets = self.jefeDeMesaController.obtenerTiposTicket()
+            self.mostrarTipoTicket(tiposTickets)
             
-                tipot = TipoTicketEntity()
-                tipot.id = idTipoTicketAModificar
-                print("Nombre Anterior del Tipo Ticket: %s"%tipot.nomTipoTicket)
-                tipot.nomTipoTicket  = input("ingrese el nuevo Nombre para el Tipo de ticket: ")
-                
-                print("Descripcion Anterior del Tipo de Ticket: %s"%tipot.dscTipoTicket)
-                tipot.dscTipoTicket = input("ingrese la nueva Descripcion para el Tipo de Ticket: ")
-                
-                input("Presione enter para continuar con el guardado del ticket")
-                print("Inicia el guardaod del Tipo de Ticket")
-                self.jefeDeMesaController.modificarTipoTicket(tipot)
-                print("Se Guardo Correctamente el Tipo de Ticket")
-            except Exception as error :
-                print("ocurrio un error al guardar la modificacion del tipo de ticket")
-                logging.error(error)
-            OpcionesComunes.presioneEnterContinuar()
-        pass
+            opcionesValidas = []
+            for item in tiposTickets:
+                opcionesValidas.append(item.id)
+            opcionesValidas.append(0)
+            text = "ingrese el id del tipo de ticket a modificar (ingrese 0 para volver atras): "
+            idTipoTicketAModificar =GuiInputUtils.inputTextCustom(opcionesValidas, text)
+            if(idTipoTicketAModificar == 0):
+                break
+            else:
+                try:
+                    for item in tiposTickets:
+                        if(item.id == idTipoTicketAModificar):
+                            tipoTicket = item
+                    GuiUtils.clearTerminal()
+                    GuiUtils.titulo("Ejecutivo mesa de ayuda")
+                    GuiUtils.subtitulo(" Modificación de tipo de ticket: " + tipoTicket.nomTipoTicket)
+                    GuiUtils.subtitulo(" Por favor ingrese el detalle requerido: ")
+                    tipoTicket.nomTipoTicket = input(" Nombre: ")
+                    tipoTicket.dscTipoTicket = input(" Descripción: ")
+                    self.jefeDeMesaController.modificarTipoTicket(tipoTicket)
+                    GuiUtils.clearTerminal()
+                    GuiUtils.tituloEspaciado("Tipo de ticket modificado correctamente")
+                    input(" Presione cualquier tecla continuar...")
+                except Exception as error :
+                    print("ocurrio un error al guardar la modificacion del tipo de ticket")
+                    logging.error(error)
 
     def eliminaTipoTicket(self):
         while True:
@@ -119,31 +116,45 @@ class GestionarTiposTicket:
                     
                 opcionesValidas.append(0)
 
-                print("ingrese el id del registro a modificar (ingrese 0 para salir)")
-                idTipoTicketAEliminar =GuiInputUtils.inputNumber(opcionesValidas)
+                text = " Ingresar n° de tipo de ticket a eliminar (ingrese 0 volver atras): "
+                idTipoTicketAEliminar =GuiInputUtils.inputTextCustom(opcionesValidas, text)
 
                 if idTipoTicketAEliminar == 0:
                     break
                 else:    
                     eliminable = self.jefeDeMesaController.tipoTicketEliminable(idTipoTicketAEliminar)
                     if eliminable:        
-                        print("Se inicia la eliminacion del tipo de ticket")
                         self.jefeDeMesaController.eliminarTipoTicket(idTipoTicketAEliminar)
-                        print("Se elimino el tipo de ticket correctamente")
-                        
+                        GuiUtils.clearTerminal()
+                        GuiUtils.tituloEspaciado("Tipo de ticket eliminado correctamente")
+                        input(" Presione cualquier tecla continuar...")
                     else:
-                        print("El Tipo de Ticket no se puede eliminar ya que cuenta con Tickets Asignado")
-                    OpcionesComunes.presioneEnterContinuar()
+                        GuiUtils.clearTerminal()
+                        GuiUtils.tituloEspaciado("El Tipo de Ticket no se puede eliminar ya que cuenta con tickets Asignados")
+                        input(" Presione cualquier tecla continuar...")
             except Exception as error:
                 logging.error(error)
                 print("ocurrrio un error al intentar Eliminar el Tipo de Ticket")
-            
-        OpcionesComunes.presioneEnterContinuar()
        
     def mostrarTipoTicket(self,tiposTickets):
         GuiUtils.clearTerminal()
-        print(GuiUtils.subrrayar("Listado de tipos de ticket"))
-        HEADER = "|  ID  |    Nombre   |  Descripcion   |"
-        print(HEADER)        
+        GuiUtils.titulo("Jefe de mesa de ayuda")
+        GuiUtils.subtitulo(" Listado de tipos de tickets existentes")
+        GuiUtils.espaciado()
+        header = "|" + GuiUtils.customText(2, 9, " ", "ID")
+        header += "|" + GuiUtils.customText(2, 88, " ", "Nombre") + "|"
+        print(header)
+        GuiUtils.espaciado()
+        print("| " + GuiUtils.customText( 1, 97, " ", "Descripción") + "|")
+        GuiUtils.espaciado()
+        GuiUtils.separador()
         for item in tiposTickets:
-            print("| %3s  | %30s | %30s |"%(item.id, item.nomTipoTicket, item.dscTipoTicket))
+            #print("| %3s  | %30s | %30s |"%(item.id, item.nomArea, item.dscArea))
+            GuiUtils.espaciado()
+            data = "|" + GuiUtils.customText(2, 9, " ", item.id)
+            data += "|" + GuiUtils.customText(2, 88, " ", item.nomTipoTicket) + "|"
+            print(data)
+            GuiUtils.espaciado()
+            print("| " + GuiUtils.customText( 1, 97, " ", item.dscTipoTicket) + "|")
+            GuiUtils.espaciado()
+            GuiUtils.separador()       
