@@ -125,24 +125,25 @@ class UsuarioRepository:
         cursor.execute(SQL, val)
         
         
-    def desactivarUsuario(self,idUsuario ):
+    def desactivarUsuario(self,usuario):
         
         cursor =  self._dbConn.cursor()
         db = self._dbConn
-        SQL = """
-         update tma.usuario set id_estado = 2 where id_usuario = %s
-        """
-        val = (
-            idUsuario,
-           
-        )
+        status = 2
+        if(usuario.idEstado == 2):
+            status = 1
+        SQL = "update usuario set id_estado = %s where id_usuario = %s"
+        val = (status, usuario.id, )
         cursor.execute(SQL, val)
         
 
         cursor.close()  
 
         db.commit()
-        return True
+        salida = "activado"
+        if(status == 2):
+            salida = "desactivado"
+        return salida
     
     def obtenerUsuariosPorArea (self,idArea):
         try:
@@ -216,7 +217,36 @@ class UsuarioRepository:
             logging.error("ocurrio un error al intentar obtener los usuarios")
             logging.error(error)
             raise Exception
-        
+
+    def nombreUsuarioDisponible(self, nombreUsuario):
+        try:
+            SQL = "SELECT count(*) FROM usuario where  nombre_usuario = %s"
+            cursor =  self._dbConn.cursor()
+            val = (nombreUsuario,)
+            cursor.execute(SQL,val)
+            result = cursor.fetchall()
+            cursor.close()  
+            return result[0][0] <= 0
+        except Exception as error:
+            logging.error("ocurrio un error al intentar obtener los tipos de ticket")
+            logging.error(error)
+            raise Exception 
+
+    def modificarUsuario(self, usuario):
+        try:
+            SQL = "update usuario set password = %s where id_usuario = %s"
+            VALUES = (usuario.password, usuario.id, )
+            cursor =  self._dbConn.cursor()
+            cursor.execute(SQL,VALUES)
+            result= cursor.fetchall()
+            self._dbConn.commit()
+            cursor.close()  
+            return result
+        except Exception as error:
+            logging.error("ocurrio un error al intentar modificar el area")
+            logging.error(error)
+            raise Exception
+
     @staticmethod
     def build():
         UsuarioRepository._usuarioRepository = UsuarioRepository()    

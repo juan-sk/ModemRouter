@@ -63,7 +63,7 @@ class Usuario:
         if usuario.idEstado ==1:
             u.dscEstado = "Activo"
         else:
-            u.dscEstado = "Desactivo"
+            u.dscEstado = "Inactivo"
         return u
     
     @staticmethod

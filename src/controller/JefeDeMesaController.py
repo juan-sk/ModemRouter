@@ -42,7 +42,7 @@ class JefeDeMesaController:
         
     def obtenerUsuarios(self):
         try:
-            usuarios = self.usuarioService.obtenerUusarios();
+            usuarios = self.usuarioService.obtenerUusarios()
           
             return usuarios
         except Exception as error:
@@ -50,15 +50,16 @@ class JefeDeMesaController:
             logging.error(error)
             pass
         
-    def desactivarUusario(self, isUsuario):
+    def desactivarUusario(self, usuario):
         try:
-            usuarios = self.usuarioService.desactivarUsuario(isUsuario);
-          
+            usuarios = self.usuarioService.desactivarUsuario(usuario)
             return usuarios
         except Exception as error:
             logging.error("ocurrio un error obteniendo usuarios")
             logging.error(error)
             pass
+    def nombreUsuarioDisponible(self, nombreUsuario):
+        return self.usuarioService.nombreUsuarioDisponible(nombreUsuario)
     def obtenerAreas(self):
         return self.ticketService.obtenerAreas()
     def validarRelacionArea(self, idAreaAValidar):
@@ -101,6 +102,14 @@ class JefeDeMesaController:
         return self.ticketService.buscarTicketsPorUsuarioCierre(idUsuario)
     def buscarTicketsPorArea(self,idArea):
         return self.ticketService.buscarTicketsPorArea(idArea)
+
+    def modificarArea(self,area):
+        return self.ticketService.modificarArea(area)
+
+    def modificarUsuario(self, usuario):
+        return self.usuarioService.modificarUsuario(usuario)
+
+
     @staticmethod
     def build():
         JefeDeMesaController._jefeDeMesaController = JefeDeMesaController()
