@@ -18,8 +18,8 @@ class GestionarUsuario:
     def start(self):
         while True:
             
-            #opcionMenu = self.menuOpciones()
-            opcionMenu = 2
+            opcionMenu = self.menuOpciones()
+            
             if opcionMenu == 1:
                 # ir a crear usuario
                 # print ("ir crear usuario")
