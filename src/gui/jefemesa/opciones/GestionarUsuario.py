@@ -16,107 +16,128 @@ class GestionarUsuario:
     
 
     def start(self):
-        opcionMenu = self.menuOpciones()
-        if opcionMenu == 1:
-            # ir a crear usuario
-            # print ("ir crear usuario")
-            self.crearUsuario()
-        # elif opcionMenu == 2:
-            #  ir a modificar usuario
-            # print ("ir modificar usuario")
-        elif opcionMenu == 2:
+        while True:
             
-            # print ("ir a desactivar usuario")
-            self.desactivarUsuario()
-        elif opcionMenu == 3:
-            pass             
-        return
+            #opcionMenu = self.menuOpciones()
+            opcionMenu = 2
+            if opcionMenu == 1:
+                # ir a crear usuario
+                # print ("ir crear usuario")
+                self.crearUsuario()
+            elif opcionMenu == 2:
+                #  ir a modificar usuario
+                self.modificarUsuario()
+            elif opcionMenu == 3:
+                
+                # print ("ir a desactivar usuario")
+                self.desactivarUsuario()
+            elif opcionMenu == 0:
+                break
+            return
     
 
     def menuOpciones(self):
-        while True:
-            try:
-                GuiUtils.clearTerminal()
-                print("     Gestion de usuario         ")
-
-                print (GuiUtils.subrrayar(" Opciones "))
-                opcionesValidas  = [1,2,3]
-                print("")
-                print ("1). Crea Usuario")
-                #print ("2). Modifica Usuario")
-                print ("2). Desactiva Usuario")
-                print ("3). Atras")
-                print ("")
-                value = int(input("ingrese Opcion: "))
-                if value in opcionesValidas:
-                    # opcionMenu = value 
-                    return value 
-                else: 
-                    print("ingrese una opcion Valida")
-            except Exception as error:
-                logging.error("ocurio un error en el menu de opciones de gestion de usuario")
-                logging.error(error)
-                print("ocurrio un error con la opcion que ingreso")
+        GuiUtils.clearTerminal()
+        GuiUtils.titulo("Jefe de mesa de ayuda")
+        GuiUtils.subtitulo("Menu de opciones para usuario")
+        GuiUtils.izq("1) Crear usuario")
+        GuiUtils.izq("2) Modificar usuario")
+        GuiUtils.izq("3) Activar o desactivar usuarios")
+        GuiUtils.izq("0) Volver")
+        GuiUtils.separador()
+        opcionesValidas = [0,1,2,3]
+        value = int(input(" Ingrese un n° de opción para continuar: "))
+        if value in opcionesValidas:
+            return value
 
     def crearUsuario(self):
-        usuario = UsuarioEntity()
         while True:
-            print("ingrese los datos del usuario")
+            usuario = UsuarioEntity()
             GuiUtils.clearTerminal()
-            print("     Creacion de usuario         ")
-            print("")
-            usuario = self.formularioCreacionUsuario()
-            GuiUtils.clearTerminal()
-            usuario.print()
-            
-            print(" ¿Los valores para el Usuario son Correctos? (Si,No)")
-            resp = GuiInputUtils.inputSiNo()
-            if resp >0:
-                break
+            GuiUtils.titulo("Jefe de mesa de ayuda")
+            GuiUtils.subtitulo(" Creación de usuario")
+            GuiUtils.subtitulo(" Por favor ingrese el detalle requerido: ")
+            nombreUsuario = input(" Nombre de usuario: ")
+            nombreUsuarioDisponible = self.jefeDeMesaController.nombreUsuarioDisponible(nombreUsuario)
+            if(nombreUsuarioDisponible): 
+                usuario = self.formularioCreacionUsuario(nombreUsuario)
+                GuiUtils.clearTerminal()
+                GuiUtils.titulo("Jefe de mesa de ayuda")
+                GuiUtils.subtitulo(" Creación de usuario")
+                GuiUtils.subtitulo(" Vista previa del usuario: ")
+                data = "|" + GuiUtils.customText(2, 49, " ", "Nombre de usuario: ")
+                data += "|" + GuiUtils.customText(2, 48, " ", usuario.nombreUsuario) + "|"
+                print(data)
+                data = "|" + GuiUtils.customText(2, 49, " ", "Contraseña: ")
+                data += "|" + GuiUtils.customText(2, 48, " ", usuario.password) + "|"
+                print(data)
+                data = "|" + GuiUtils.customText(2, 49, " ", "Tipo de usuario: ")
+                data += "|" + GuiUtils.customText(2, 48, " ", usuario.dscTipoUsuario) + "|"
+                print(data)
+                data = "|" + GuiUtils.customText(2, 49, " ", "Área: ")
+                data += "|" + GuiUtils.customText(2, 48, " ", usuario.dscArea) + "|"
+                print(data)
+                GuiUtils.separador()
+                resp = GuiInputUtils.inputSiNo()
+                if resp < 0:
+                    break
+                else:    
+                    resp =  self.jefeDeMesaController.guardarUsuario(usuario)
+                    GuiUtils.clearTerminal()
+                    GuiUtils.tituloEspaciado("Usuario creado correctamente")
+                    input(" Presione cualquier tecla continuar...")
+                    break
             else:
-                pass
-            
-        # guardar usuario
-        resp =  self.jefeDeMesaController.guardarUsuario(usuario)
-        if resp>0:
-            print("el usuario fue creado Correctamente")
-        else:
-            print("Ocurrio Un error Al Crear El Usuario")
-        OpcionesComunes.presioneEnterContinuar()
-            
+                GuiUtils.clearTerminal()
+                GuiUtils.tituloEspaciado("El usuario [" + nombreUsuario + "], ya existe")
+                GuiUtils.espaciado()
+                GuiUtils.izq("1) Ingresar un nuevo usuario")
+                GuiUtils.izq("0) Volver")
+                GuiUtils.espaciado()
+                GuiUtils.separador()
+                opcionesValidas  = [0, 1]
+                text = " Ingrese un n° de opción para continuar: "
+                value = GuiInputUtils.inputTextCustom(opcionesValidas, text)
+                if(value == 0):
+                    break
     
-    def formularioCreacionUsuario(self):
+    def formularioCreacionUsuario(self, nombreUsuarioDisponible):
         usuario = Usuario()
-        nombreUsuario = input("Nombre de usuario:")
-        print("Contraseña del usaurio")
-        passwordUsuario =  getpass.getpass()
-        GuiUtils.clearTerminal()
-        print("Ingrese el tipo de usuario ")
-        print("")
-        print(GuiUtils.subrrayar(" Opciones "))
-        # obrener opciones 
+        nombreUsuario = nombreUsuarioDisponible
+        passwordUsuario =  getpass.getpass(" Contraseña: ")
+        GuiUtils.separador()            
+        GuiUtils.subtitulo(" Tipo de usuario: ")
         tiposUsuario = self.jefeDeMesaController.obtenerTiposUsuario()
         opcionesValidas = []
-        # imprimir opciones
-        if len(tiposUsuario)>0:
-            for item in tiposUsuario:
-                print("%s). %s - Descripcion:%s"%(item.id,item.nomTipoUsuario,item.dscTipoUsuraio))
-                opcionesValidas.append(item.id)
-                 
-        idTipoUsuario = GuiInputUtils.inputNumber(opcionesValidas)
-        usuario.dscTipoUsuario =Usuario.encontrarTipoUsuario(idTipoUsuario,tiposUsuario).nomTipoUsuario
+        # if len(tiposUsuario) >0:
+        for item in tiposUsuario:
+            opcionesValidas.append(item.id)
+            #print("%s). %s - Descripcion:%s"%(item.id,item.nomTipoUsuario,item.dscTipoUsuraio))
+            GuiUtils.izq("%s). %s: %s"%(item.id,item.nomTipoUsuario,item.dscTipoUsuraio))
+        GuiUtils.separador()           
+        text = " Seleccione una opción: "
+        idTipoUsuario = GuiInputUtils.inputTextCustom(opcionesValidas, text)
+        usuario.dscTipoUsuario = Usuario.encontrarTipoUsuario(idTipoUsuario,tiposUsuario).nomTipoUsuario
         idArea = 0
-        if idTipoUsuario ==3:
+        usuario.dscArea = "No asignada"
+        if idTipoUsuario == 3:
             # agregar area 
             # obtener areas
-            areas = self.jefeDeMesaController.obtenerAreas();
+            areas = self.jefeDeMesaController.obtenerAreas()
             # mostrar
             opcionesValidasArea = []
-            if len(areas)>0:
-                for item in areas:
-                    print("%s). %s Detalle:%s"%(item.id,item.nomArea,item.dscArea))
-                    opcionesValidasArea.append(item.id)
-            idArea = GuiInputUtils.inputNumber(opcionesValidasArea)
+            #if len(areas)>0:
+            GuiUtils.separador()           
+            for item in areas:
+                opcionesValidasArea.append(item.id)
+                #print("%s) %s Detalle:%s"%(item.id,item.nomArea,item.dscArea))
+                GuiUtils.izq("%s) %s Detalle:%s"%(item.id,item.nomArea,item.dscArea))
+            GuiUtils.separador()           
+            text = " Seleccione una opción: "
+            idArea = GuiInputUtils.inputTextCustom(opcionesValidasArea, text)
+            for item in areas:
+                if(item.id == idArea):
+                    usuario.dscArea = item.nomArea
         usuario.nombreUsuario = nombreUsuario
         usuario.password = passwordUsuario
         usuario.idEstado = 1
@@ -124,11 +145,36 @@ class GestionarUsuario:
         usuario.idArea = idArea
         return usuario
         
+    def modificarUsuario(self):
+        while True:
+            usuarios = self.jefeDeMesaController.obtenerUsuarios()
+            OpcionesComunes.mostarUsuarios(usuarios)
+            opcionesValidas = []
+            for item in usuarios:
+                opcionesValidas.append(item.id)
+
+            opcionSalida = 0
+            opcionesValidas.append(opcionSalida)
         
-    def mostrarUusarios(self):
-        print("Lista de usuarios")
-        # buscar usuarios
-        
+            text = " Ingresar n° de usuario a modificar (ingrese 0 volver atras): "
+            idUsuario = GuiInputUtils.inputTextCustom(opcionesValidas, text)
+            
+            if idUsuario == 0:
+                break
+            else:
+                for item in usuarios:
+                    if(item.id == idUsuario):
+                        usuario = item
+                GuiUtils.clearTerminal()
+                GuiUtils.titulo("Ejecutivo mesa de ayuda")
+                GuiUtils.subtitulo(" modificación de usuario: " + usuario.nombreUsuario)
+                GuiUtils.subtitulo(" Por favor ingrese el detalle requerido: ")
+                usuario.password =  getpass.getpass(" Contraseña: ")
+                self.jefeDeMesaController.modificarUsuario(usuario)
+                GuiUtils.clearTerminal()
+                GuiUtils.tituloEspaciado("Usuario modificado correctamente")
+                input(" Presione cualquier tecla continuar...")
+
     
     @staticmethod
     def imprimirInfomracionUsuario(usuario,estado, tipoUsuario,area):
@@ -142,15 +188,29 @@ class GestionarUsuario:
             
   
     def desactivarUsuario(self):
-        usuarios = self.jefeDeMesaController.obtenerUsuarios();
-        OpcionesComunes.mostarUsuarios(usuarios)
-        id = int(input("Ingrese el ID del registro a DESACTIVAR: "))
-        
-        desactivado = self.jefeDeMesaController.desactivarUusario(id)
-        if(desactivado):
-            print("el usuario se desactivo correctamente")
-        else:
-            print("el usuario no se desactivo correctamente")
+        while True:
+            usuarios = self.jefeDeMesaController.obtenerUsuarios()
+            OpcionesComunes.mostarUsuarios(usuarios)
+            opcionesValidas = []
+            for item in usuarios:
+                opcionesValidas.append(item.id)
 
+            opcionSalida = 0
+            opcionesValidas.append(opcionSalida)
 
+            text = " Ingresar n° del usuario al cual se cambiara su estado (ingrese 0 volver atras): "
+            idUsuario = GuiInputUtils.inputTextCustom(opcionesValidas, text)
+            
+            if idUsuario == 0:
+                break
+            else:    
+                for item in usuarios:
+                    if(item.id == idUsuario):
+                        usuario = item
+                resultado = self.jefeDeMesaController.desactivarUusario(usuario)
+                text = "Usuario " + resultado + " correctamente"
+                GuiUtils.clearTerminal()
+                GuiUtils.tituloEspaciado(text)
+                input(" Presione cualquier tecla continuar...")
+                break
         

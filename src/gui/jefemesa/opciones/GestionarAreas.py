@@ -16,33 +16,33 @@ class GestionarAreas:
         
         while True:
             
-            GuiUtils.clearTerminal()
-            
             opcion = self.menuOpciones()
+
             if opcion == 1:
                 self.crearArea()
-            #elif opcion ==2:
-            #    self.modificarArea()
             elif opcion == 2:
+                self.modificarArea()
+            elif opcion == 3:
                 self.eliminarAreas()
                 pass
-            elif opcion == 3:
+            elif opcion == 0:
                 break
     
     def crearArea(self):
         while True:
             GuiUtils.clearTerminal()
-            print(GuiUtils.subrrayar("Crear Area"))
+            GuiUtils.titulo("Jefe de mesa de ayuda")
+            GuiUtils.subtitulo(" Creación de área")
+            GuiUtils.subtitulo(" Por favor ingrese el detalle requerido: ")
             area = AreaEntity()
-            area.nomArea= input("Nombre: ")
-            area.dscArea = input("Descripcion: ")
-            area.print()
-            print()
-            input("Resumen de los datos ingresados, presione una tecla para continuar...")
+            area.nomArea= input(" Nombre: ")
+            area.dscArea = input(" Descripción: ")
             # guardar area 
             try:
                 self.jefeDeMesaController.guardarArea(area)
-                print("Area creada, presione una tecla para continuar ")
+                GuiUtils.clearTerminal()
+                GuiUtils.tituloEspaciado("Área creada correctamente")
+                input(" Presione cualquier tecla continuar...")
                 break
             except Exception as error :
                 logging.error("ocurrion un error guardando el area")
@@ -57,9 +57,38 @@ class GestionarAreas:
                     break
              
     def modificarArea(self):
-        
-        pass
-    
+        while True:
+            areas = self.jefeDeMesaController.obtenerAreas()
+            
+            self.mostrarAreas(areas)
+            
+            opcionesValidas = []
+            for item in areas:
+                opcionesValidas.append(item.id)
+
+            opcionSalida = 0
+            opcionesValidas.append(opcionSalida)
+
+            text = " Ingresar n° de área a modificar (ingrese 0 volver atras): "
+            idAreaModificar = GuiInputUtils.inputTextCustom(opcionesValidas, text)
+            
+            if idAreaModificar == 0:
+                break
+            else:
+                for item in areas:
+                    if(item.id == idAreaModificar):
+                        area = item
+                GuiUtils.clearTerminal()
+                GuiUtils.titulo("Ejecutivo mesa de ayuda")
+                GuiUtils.subtitulo(" modificación de área: " + area.nomArea)
+                GuiUtils.subtitulo(" Por favor ingrese el detalle requerido: ")
+                area.nomArea = input(" Nombre: ")
+                area.dscArea = input(" Descripción: ")
+                self.jefeDeMesaController.modificarArea(area)
+                GuiUtils.clearTerminal()
+                GuiUtils.tituloEspaciado("Área modificada correctamente")
+                input(" Presione cualquier tecla continuar...")
+
     def eliminarAreas(self):
         while True:
             areas = self.jefeDeMesaController.obtenerAreas()
@@ -73,37 +102,72 @@ class GestionarAreas:
             opcionSalida = 0
             opcionesValidas.append(opcionSalida)
 
-            print("Ingrese el id del Area a Eliminar (ingrese 0 para salir)")
-            idAreaEliminar = GuiInputUtils.inputNumber(opcionesValidas)
+            text = " Ingresar n° de área a eliminar (ingrese 0 volver atras): "
+            idAreaEliminar = GuiInputUtils.inputTextCustom(opcionesValidas, text)
             
             if idAreaEliminar == 0:
                 break
             else:    
                 eliminable = self.jefeDeMesaController.validarRelacionArea(idAreaEliminar)
                 if eliminable:
-                    print("Se inicia la eliminacion del area")
+                    #print("Se inicia la eliminacion del area")
                     self.jefeDeMesaController.eliminarArea(idAreaEliminar)
-                    print("Se elimino el area correctamente")
+                    GuiUtils.clearTerminal()
+                    GuiUtils.tituloEspaciado("Área eliminada correctamente")
+                    input(" Presione cualquier tecla continuar...")
+                    #print("Se elimino el area correctamente")
                 else:
                     print("No se puede Eliminar el registro ya que cuenta tickets asignados")
-                OpcionesComunes.presioneEnterContinuar()
 
     def mostrarAreas(self,areas):
         GuiUtils.clearTerminal()
-        print(GuiUtils.subrrayar("Listado de areas"))
-        HEADER = "|  ID  |    Nombre   |  Descripcion   |"
-        print(HEADER)        
+        GuiUtils.titulo("Jefe de mesa de ayuda")
+        GuiUtils.subtitulo(" Listado de áreas existentes")
+        GuiUtils.espaciado()
+        header = "|" + GuiUtils.customText(2, 9, " ", "ID")
+        header += "|" + GuiUtils.customText(2, 88, " ", "Nombre") + "|"
+        print(header)
+        GuiUtils.espaciado()
+        print("| " + GuiUtils.customText( 1, 97, " ", "Descripción") + "|")
+        GuiUtils.espaciado()
+        GuiUtils.separador()
         for item in areas:
-            print("| %3s  | %30s | %30s |"%(item.id, item.nomArea, item.dscArea))
+            #print("| %3s  | %30s | %30s |"%(item.id, item.nomArea, item.dscArea))
+            GuiUtils.espaciado()
+            data = "|" + GuiUtils.customText(2, 9, " ", item.id)
+            data += "|" + GuiUtils.customText(2, 88, " ", item.nomArea) + "|"
+            print(data)
+            GuiUtils.espaciado()
+            print("| " + GuiUtils.customText( 1, 97, " ", item.dscArea) + "|")
+            GuiUtils.espaciado()
+            GuiUtils.separador()       
+    
+    def mostrarAreasSimple(self,areas):
+        GuiUtils.clearTerminal()
+        GuiUtils.titulo("Jefe de mesa de ayuda")
+        GuiUtils.subtitulo(" Listado de áreas existentes")
+        header = "|" + GuiUtils.customText(2, 49, " ", "ID")
+        header += "|" + GuiUtils.customText(2, 48, " ", "Nombre") + "|"
+        print(header)
+        GuiUtils.separador()
+        for item in areas:
+            #print("| %3s  | %30s | %30s |"%(item.id, item.nomArea, item.dscArea))
+            data = "|" + GuiUtils.customText(2, 49, " ", item.id)
+            data += "|" + GuiUtils.customText(2, 48, " ", item.nomArea) + "|"
+            print(data)
+            GuiUtils.separador()       
 
     def menuOpciones(self):
         
-        print(GuiUtils.subrrayar("Gestionar area")) 
-        print()            
-        print("1). Crear Area")            
-        #print("2). Modificar Areas")            
-        print("2). Eliminar Area")            
-        print("3). Atras")            
-        print()            
-        opcionsValidas = [1,2,3]
-        return GuiInputUtils.inputNumber(opcionsValidas)
+        GuiUtils.clearTerminal()
+        GuiUtils.titulo("Jefe de mesa de ayuda")
+        GuiUtils.subtitulo("Menu de opciones para áreas ")
+        GuiUtils.izq("1) Crear área")
+        GuiUtils.izq("2) Modificar área")
+        GuiUtils.izq("3) Eliminar área")
+        GuiUtils.izq("0) Volver")
+        GuiUtils.separador()
+        opcionesValidas = [0,1,2,3]
+        value = int(input(" Ingrese un n° de opción para continuar: "))
+        if value in opcionesValidas:
+            return value

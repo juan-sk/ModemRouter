@@ -98,12 +98,12 @@ VALUES
     (
         2,
         "Ejecutivo de mesa",
-        "Usuario del sistema, cuenta con acceso restringido, puede generar tickets"
+        "Cuenta con acceso restringido, puede generar tickets"
     ),
     (
         3,
         "Ejecutivo espefico",
-        "Usuario del sistema, cuenta con acceso restringido, puede gestionar ticket"
+        "Cuenta con acceso restringido, puede gestionar ticket"
     );
 
 DROP TABLE IF EXISTS `estado_usuario`;

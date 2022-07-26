@@ -6,6 +6,17 @@ from operator import ne
 class GuiInputUtils:
     
     @staticmethod
+    def inputTextCustom(opcionesValidas, text):
+        while True:
+            try:              
+                value = int(input(text))
+                if value in opcionesValidas:
+                    return value 
+            except Exception as error:
+                logging.error("ocurio un error con el input ingresado")
+                logging.error(error)
+                print("ocurrio un error con el valor ingresado, Intente nuevamente ")
+    @staticmethod
     def inputNumber(opcionesValidas):
         while True:
             try:              
@@ -36,26 +47,23 @@ class GuiInputUtils:
         while True:
             try:              
                 # opcionesValidas  = [1,2,3]
-                value = input("ingrese Opcion: ")
-                if value in opcionesValidas:
-                    return value 
+                value = input(" Confirma la operación [Si|No]: ")
+                if(type(value) != str):
+                    print("ingrese una opcion valida")
                 else: 
-                    print("ingrese una opcion Valida")
+                    value = value.upper()
+                    if(value in opcionesValidas):
+                        return value
             except Exception as error:
                 logging.error("ocurio un error con el input ingresado")
                 logging.error(error)
                 print("ocurrio un error con el valor ingresado, Intente nuevamente ")
     @staticmethod
     def inputSiNo():
-        afirmativos = ["si","Si","SI"];
-        negativos = ["no","No","NO"]
-        conbinado = afirmativos+negativos
-        resp = GuiInputUtils.inputString(conbinado)
-        if resp in afirmativos:
+        resp = GuiInputUtils.inputString(["SI", "NO"])
+        if resp == "SI":
             return 1
-        elif resp in negativos:
-            return -1
         else:
-            return 0
+            return -1
         
         

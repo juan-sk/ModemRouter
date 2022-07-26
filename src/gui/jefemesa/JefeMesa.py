@@ -21,26 +21,27 @@ class JefeMesa:
             
             if opcion == 1:
                 self.gestionarUsuario.start()
-            elif opcion ==2:
+            elif opcion == 2:
                 self.gestionarAreas.start()
-            elif opcion ==3:
+            elif opcion == 3:
                 self.gestionarTiposTicket.start()
-            elif opcion ==4:
+            elif opcion == 4:
                 self.consultaTickets.start()
                 pass    
-            elif opcion ==5:
+            elif opcion == 0:
                 break
         
     def menuOpcionesJefeMesa(self):
         GuiUtils.clearTerminal()
-        print(GuiUtils.subrrayar( "Opciones jefe mesa"))
-        print()
-        print("1). Gestionar Usuarios")
-        print("2). Gestionar Areas")
-        print("3). Gestionar Tipos Ticket")
-        print("4). Consultar Tickets")
-        print("5). Cerrar Sesion")
-        
-        opcionesValidas = [1,2,3,4,5]
-        opcion = GuiInputUtils.inputNumber(opcionesValidas)
-        return opcion
+        GuiUtils.titulo("Jefe de mesa de ayuda")
+        GuiUtils.subtitulo("Menu de opciones ")
+        GuiUtils.izq("1) Gestionar Usuarios")
+        GuiUtils.izq("2) Gestionar Areas")
+        GuiUtils.izq("3) Gestionar Tipos Ticket")
+        GuiUtils.izq("4) Consultar Tickets")
+        GuiUtils.izq("0) Cerrar sesión")
+        GuiUtils.separador()
+        opcionesValidas = [0,1,2,3,4]
+        value = int(input(" Ingrese un n° de opción para continuar: "))
+        if value in opcionesValidas:
+            return value 

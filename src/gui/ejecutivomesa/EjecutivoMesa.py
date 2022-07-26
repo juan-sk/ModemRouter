@@ -9,21 +9,18 @@ class EjecutivoMesa:
     
     def __init__(self):
        self.creaTicket = CreaTicket()
-       self.VerTickets = VerTickets()
-    
-    
+       self.VerTickets = VerTickets()   
      
     def start(self,idUsuario):
         while True:
             opcion = self.menuOpciones()
-            
             if opcion == 1:
                 #print("ver Tickets")
                 VerTickets().start()
-            elif opcion ==2:
+            elif opcion == 2:
                 #print("Crear tiket")
                 CreaTicket().start(idUsuario)
-            elif opcion == 3:
+            elif opcion == 0:
                 #print("salir")
                 return True
 
@@ -32,21 +29,17 @@ class EjecutivoMesa:
         while True:
             try:
                 GuiUtils.clearTerminal()
-                print("     Menu Ejecutivo Mesa         ")
-                print("")
-  
-                
-                print(GuiUtils.subrrayar("Opciones: "))
-                print("1). Ver tickets")
-                print("2). Crear Ticket")
-                print("3). Cerrar Secion")
-                opcionesValidas  = [1,2,3]
-                value = int(input("ingrese Opcion: "))
+                GuiUtils.titulo("Ejecutivo mesa de ayuda")
+                GuiUtils.subtitulo("Menu de opciones ")
+                GuiUtils.izq("1) Ver tickets")
+                GuiUtils.izq("2) Crear Ticket")
+                GuiUtils.izq("0) Cerrar sesión")
+                GuiUtils.separador()
+                opcionesValidas  = [0,1,2]
+                value = int(input(" Ingrese un n° de opción para continuar: "))
                 if value in opcionesValidas:
                     # opcionMenu = value 
                     return value 
-                else: 
-                    print("ingrese una opcion Valida")
             except Exception as error :
                 logging.error("ocurio un error en el menu de opciones de gestion de usuario")
                 logging.error(error)
