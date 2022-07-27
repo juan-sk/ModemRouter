@@ -23,7 +23,7 @@ class OpcionesComunes:
     def mostarUsuarios(usuarios):
         GuiUtils.clearTerminal()
         GuiUtils.titulo("Ejecutivo especifico")
-        GuiUtils.subtitulo(" Lsitado de usuarios del sistema")        
+        GuiUtils.subtitulo(" Listado de usuarios del sistema")        
         try:
             header = "|" + GuiUtils.customText(2, 9, " ", "ID")
             header += "|" + GuiUtils.customText(2, 28, " ", "Nombre")

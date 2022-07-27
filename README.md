@@ -13,7 +13,7 @@ python -m pip install python-dotenv
 ### Script de inicialización de la base de datos config/initAppDb.sql"
 
 ## Configuración de variables de entorno mediante dotenv 
-### ejemplo de archivo config/.env_sample reemplazar el contenido y renombrar por config/.env
+### ejemplo de archivo config/.env_sample reemplazar el contenido y renombrar por .env dejando este en la raiz
 
 ## Iniciar la aplicación
 ### Para iniciar la app se debe correr el archivo de entrada con Python
